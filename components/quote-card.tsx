@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { scaleFont, moderateScale } from '@/utils/responsive';
 
 interface QuoteCardProps {
   quote: string;
@@ -35,28 +36,39 @@ export function QuoteCard({ quote, onRefresh, containerStyle }: QuoteCardProps) 
 
   return (
     <View
+      accessible
+      accessibilityRole="summary"
+      accessibilityLabel={`Inspiração: ${quote}`}
       style={[
         styles.container,
         {
           backgroundColor: colors.card,
           borderColor: colors.border,
+          padding: moderateScale(18),
+          marginHorizontal: moderateScale(20),
         },
         containerStyle,
       ]}>
       <View style={[styles.accentLine, { backgroundColor: colors.secondary }]} />
-      <View style={[styles.iconBadge, { backgroundColor: colors.secondary + '15' }]}>
-        <ThemedText style={styles.quoteIcon}>💡</ThemedText>
+      <View style={[styles.iconBadge, { backgroundColor: colors.secondary + '15', width: moderateScale(44), height: moderateScale(44), borderRadius: moderateScale(12) }]}>
+        <ThemedText style={[styles.quoteIcon, { fontSize: scaleFont(20) }]}>💡</ThemedText>
       </View>
       <View style={styles.content}>
-        <ThemedText style={[styles.label, { color: colors.textSecondary }]}>Inspiração</ThemedText>
-        <ThemedText style={[styles.quoteText, { color: colors.text }]}>{quote}</ThemedText>
+        <ThemedText style={[styles.label, { color: colors.textSecondary, fontSize: scaleFont(11) }]}>Inspiração</ThemedText>
+        <ThemedText style={[styles.quoteText, { color: colors.text, fontSize: scaleFont(15), lineHeight: scaleFont(22) }]}>{quote}</ThemedText>
       </View>
       <Animated.View style={rotationStyle}>
         <Pressable
+          accessible
+          accessibilityRole="button"
+          accessibilityLabel="Atualizar citação"
           style={[
             styles.refreshButton,
             {
               backgroundColor: colors.secondary,
+              width: moderateScale(40),
+              height: moderateScale(40),
+              borderRadius: moderateScale(12),
             },
           ]}
           onPress={handleRefresh}>
