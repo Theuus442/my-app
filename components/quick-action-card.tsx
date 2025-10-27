@@ -3,7 +3,6 @@ import { StyleSheet, View, Pressable, ViewStyle } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { IconSymbol } from '@/components/ui/icon-symbol';
 
 interface QuickActionCardProps {
   emoji: string;

@@ -36,7 +36,7 @@ export function AnimatedCompanion({
       -1,
       true
     );
-  }, []);
+  }, [scale]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
