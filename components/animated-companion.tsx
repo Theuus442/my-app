@@ -509,13 +509,12 @@ const styles = StyleSheet.create({
   },
   sparkle: {
     position: 'absolute',
-    bottom: size => size * 0.2,
     backgroundColor: '#FFD700',
     borderRadius: 9999,
     shadowColor: '#FFD700',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOpacity: 0.6,
+    shadowRadius: 6,
+    elevation: 3,
   },
 });
