@@ -33,11 +33,11 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
     <View style={[styles.container, containerStyle]} accessible accessibilityRole="region" accessibilityLabel={`Nível de bem-estar ${clampedLevel} por cento`}>
       <View style={styles.header}>
         <View>
-          <ThemedText style={[styles.label, { color: colors.textSecondary, fontSize: scaleFont(12) }]}>Nível de Bem-estar</ThemedText>
+          <ThemedText style={[styles.label, { color: '#6BCB77', fontSize: scaleFont(12), fontWeight: '700' }]}>Nível de Bem-estar</ThemedText>
           <ThemedText style={[styles.subtitle, { color: colors.textSecondary, fontSize: scaleFont(11) }]}>Sua jornada de bem-estar</ThemedText>
         </View>
-        <View style={[styles.percentageBadge, { backgroundColor: colors.secondary + '15' }]}>
-          <ThemedText style={[styles.percentage, { color: colors.secondary, fontSize: scaleFont(14) }]}>{clampedLevel}%</ThemedText>
+        <View style={[styles.percentageBadge, { backgroundColor: '#6BCB77' + '20' }]}>
+          <ThemedText style={[styles.percentage, { color: '#6BCB77', fontSize: scaleFont(14), fontWeight: '800' }]}>{clampedLevel}%</ThemedText>
         </View>
       </View>
       <View
@@ -53,7 +53,7 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
           style={[
             styles.barFill,
             {
-              backgroundColor: colors.secondary,
+              backgroundColor: '#6BCB77',
             },
             animatedBarStyle,
           ]}
