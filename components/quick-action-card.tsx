@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { StyleSheet, View, Pressable, ViewStyle } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
@@ -13,6 +13,7 @@ interface QuickActionCardProps {
   accentColor?: string;
   onPress: () => void;
   containerStyle?: ViewStyle;
+  testID?: string;
 }
 
 export function QuickActionCard({
