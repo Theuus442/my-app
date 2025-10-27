@@ -1,0 +1,28 @@
+{
+  "extends": ["expo", "prettier"],
+  "plugins": ["react-native"],
+  "rules": {
+    "react-native/no-unused-styles": "warn",
+    "react-native/no-color-literals": "warn",
+    "react-native/no-inline-styles": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "prefer-const": "warn",
+    "no-var": "error"
+  },
+  "env": {
+    "react-native/react-native": true
+  }
+}
