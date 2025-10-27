@@ -117,206 +117,296 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
 
   return (
     <View style={styles.container}>
-      {/* Multi-layer glow effect with rotation */}
+      {/* Multi-layer premium glow effect */}
       <Animated.View
         style={[
           styles.glowLayer1,
           {
-            width: size * 1.6,
-            height: size * 1.6,
-            borderRadius: size * 0.8,
+            width: size * 1.8,
+            height: size * 1.8,
+            borderRadius: size * 0.9,
             borderColor: colors.secondary,
           },
           glowAnimStyle,
-          rotationStyle,
         ]}
       />
       <Animated.View
         style={[
           styles.glowLayer2,
           {
-            width: size * 1.35,
-            height: size * 1.35,
-            borderRadius: size * 0.675,
+            width: size * 1.5,
+            height: size * 1.5,
+            borderRadius: size * 0.75,
             borderColor: colors.primary,
           },
           glowAnimStyle,
         ]}
       />
-
-      {/* Main companion container */}
       <Animated.View
         style={[
-          styles.companionWrapper,
-          floatAnimStyle,
-          scaleAnimStyle,
-        ]}>
-        <View
-          style={[
-            styles.companion,
-            {
-              width: size,
-              height: size,
-              borderRadius: size / 2,
-              backgroundColor: colors.primary,
-            },
-          ]}>
-          {/* Gradient overlay shine */}
+          styles.glowLayer3,
+          {
+            width: size * 1.25,
+            height: size * 1.25,
+            borderRadius: size * 0.625,
+            borderColor: colors.accent,
+          },
+          glowAnimStyle,
+        ]}
+      />
+
+      {/* Main companion container with animations */}
+      <Animated.View
+        style={[styles.companionWrapper, floatAnimStyle]}>
+        <Animated.View style={[bounceStyle]}>
           <View
             style={[
-              styles.shine,
-              {
-                width: size * 0.35,
-                height: size * 0.35,
-                borderRadius: size * 0.175,
-              },
-            ]}
-          />
-
-          {/* Head - Modern geometric design */}
-          <View
-            style={[
-              styles.head,
-              {
-                width: size * 0.48,
-                height: size * 0.48,
-                borderRadius: size * 0.24,
-                backgroundColor: colors.secondary,
-              },
-            ]}>
-            {/* Eyes - Modern style */}
-            <View style={styles.eyesContainer}>
-              <View
-                style={[
-                  styles.eye,
-                  {
-                    width: size * 0.1,
-                    height: size * 0.1,
-                    borderRadius: size * 0.05,
-                  },
-                ]}>
-                <View
-                  style={[
-                    styles.pupil,
-                    {
-                      width: size * 0.05,
-                      height: size * 0.05,
-                      borderRadius: size * 0.025,
-                      backgroundColor: '#0A0E27',
-                    },
-                  ]}>
-                  <View style={styles.eyeHighlight} />
-                </View>
-              </View>
-
-              <View
-                style={[
-                  styles.eye,
-                  {
-                    width: size * 0.1,
-                    height: size * 0.1,
-                    borderRadius: size * 0.05,
-                  },
-                ]}>
-                <View
-                  style={[
-                    styles.pupil,
-                    {
-                      width: size * 0.05,
-                      height: size * 0.05,
-                      borderRadius: size * 0.025,
-                      backgroundColor: '#0A0E27',
-                    },
-                  ]}>
-                  <View style={styles.eyeHighlight} />
-                </View>
-              </View>
-            </View>
-
-            {/* Mouth - Happy smile with curve */}
-            <View
-              style={[
-                styles.mouth,
-                {
-                  width: size * 0.18,
-                  height: size * 0.08,
-                  borderRadius: size * 0.09,
-                  borderBottomColor: '#0A0E27',
-                  borderBottomWidth: size * 0.02,
-                },
-              ]}
-            />
-          </View>
-
-          {/* Body - Modern rounded rectangle */}
-          <View
-            style={[
-              styles.body,
-              {
-                width: size * 0.65,
-                height: size * 0.32,
-                borderRadius: size * 0.12,
-                backgroundColor: colors.gradientStart,
-              },
-            ]}>
-            {/* Accent dots on body */}
-            <View
-              style={[
-                styles.bodyAccent,
-                {
-                  width: size * 0.08,
-                  height: size * 0.08,
-                  borderRadius: size * 0.04,
-                },
-              ]}
-            />
-            <View
-              style={[
-                styles.bodyAccent,
-                {
-                  width: size * 0.08,
-                  height: size * 0.08,
-                  borderRadius: size * 0.04,
-                  marginLeft: size * 0.35,
-                },
-              ]}
-            />
-          </View>
-
-          {/* Wellness indicator ring */}
-          <View
-            style={[
-              styles.wellnessRing,
+              styles.companion,
               {
                 width: size,
                 height: size,
-                borderRadius: size / 2,
-                borderColor: colors.secondary,
-                borderWidth: 2,
-                opacity: wellnessLevel / 100 * 0.6,
               },
-            ]}
-          />
-        </View>
+            ]}>
+            {/* Main body background with gradient effect */}
+            <View
+              style={[
+                styles.bodyBase,
+                {
+                  width: size * 0.9,
+                  height: size * 0.6,
+                  borderRadius: size * 0.25,
+                  bottom: size * 0.05,
+                },
+              ]}>
+              <Animated.View
+                style={[
+                  styles.bodyShine,
+                  {
+                    width: size * 0.3,
+                    height: size * 0.25,
+                  },
+                  scaleAnimStyle,
+                ]}
+              />
+            </View>
+
+            {/* Head - Refined and expressive */}
+            <View
+              style={[
+                styles.head,
+                {
+                  width: size * 0.55,
+                  height: size * 0.6,
+                  borderRadius: size * 0.3,
+                },
+              ]}>
+              {/* Head shine/highlight */}
+              <View
+                style={[
+                  styles.headShine,
+                  {
+                    width: size * 0.2,
+                    height: size * 0.2,
+                    borderRadius: size * 0.1,
+                  },
+                ]}
+              />
+
+              {/* Eyes container with animation */}
+              <Animated.View style={[styles.eyesContainer, eyeScaleStyle]}>
+                {/* Left eye */}
+                <View
+                  style={[
+                    styles.eyeWrapper,
+                    {
+                      width: size * 0.12,
+                      height: size * 0.14,
+                    },
+                  ]}>
+                  <View style={[styles.eye, { backgroundColor: '#FFFFFF' }]}>
+                    <View
+                      style={[
+                        styles.pupil,
+                        {
+                          width: size * 0.055,
+                          height: size * 0.07,
+                          backgroundColor: colors.secondary,
+                        },
+                      ]}>
+                      <View
+                        style={[
+                          styles.eyeLight,
+                          {
+                            width: size * 0.02,
+                            height: size * 0.025,
+                          },
+                        ]}
+                      />
+                    </View>
+                  </View>
+                </View>
+
+                {/* Right eye */}
+                <View
+                  style={[
+                    styles.eyeWrapper,
+                    {
+                      width: size * 0.12,
+                      height: size * 0.14,
+                    },
+                  ]}>
+                  <View style={[styles.eye, { backgroundColor: '#FFFFFF' }]}>
+                    <View
+                      style={[
+                        styles.pupil,
+                        {
+                          width: size * 0.055,
+                          height: size * 0.07,
+                          backgroundColor: colors.secondary,
+                        },
+                      ]}>
+                      <View
+                        style={[
+                          styles.eyeLight,
+                          {
+                            width: size * 0.02,
+                            height: size * 0.025,
+                          },
+                        ]}
+                      />
+                    </View>
+                  </View>
+                </View>
+              </Animated.View>
+
+              {/* Nose - Subtle */}
+              <View
+                style={[
+                  styles.nose,
+                  {
+                    width: size * 0.05,
+                    height: size * 0.08,
+                    borderRadius: size * 0.025,
+                  },
+                ]}
+              />
+
+              {/* Mouth - Beautiful smile */}
+              <View
+                style={[
+                  styles.mouthContainer,
+                  {
+                    width: size * 0.22,
+                  },
+                ]}>
+                <View
+                  style={[
+                    styles.mouth,
+                    {
+                      borderRadius: size * 0.08,
+                      borderBottomWidth: size * 0.025,
+                    },
+                  ]}
+                />
+              </View>
+            </View>
+
+            {/* Cheeks - adds charm and life */}
+            <View
+              style={[
+                styles.cheek,
+                {
+                  width: size * 0.1,
+                  height: size * 0.08,
+                  borderRadius: size * 0.05,
+                  left: size * 0.08,
+                },
+              ]}
+            />
+            <View
+              style={[
+                styles.cheek,
+                {
+                  width: size * 0.1,
+                  height: size * 0.08,
+                  borderRadius: size * 0.05,
+                  right: size * 0.08,
+                },
+              ]}
+            />
+
+            {/* Wellness aura ring */}
+            <Animated.View
+              style={[
+                styles.wellnessRing,
+                {
+                  width: size * 1.15,
+                  height: size * 1.15,
+                  borderRadius: size * 0.575,
+                  borderColor: colors.secondary,
+                  borderWidth: 2,
+                  opacity: wellnessLevel / 100 * 0.5,
+                },
+                scaleAnimStyle,
+              ]}
+            />
+          </View>
+        </Animated.View>
       </Animated.View>
 
-      {/* Floating particles effect */}
-      {[0, 1, 2].map((index) => (
-        <Animated.View
-          key={index}
-          style={[
-            styles.particle,
+      {/* Floating sparkle particles */}
+      {[0, 1, 2, 3].map((index) => {
+        const delay = index * 500;
+        const particleAnim = useSharedValue(0);
+
+        useEffect(() => {
+          particleAnim.value = withRepeat(
+            withTiming(1, {
+              duration: 3000,
+              easing: Easing.inOut(Easing.ease),
+            }),
+            -1,
+            true
+          );
+        }, []);
+
+        const particleStyle = useAnimatedStyle(() => ({
+          transform: [
             {
-              width: size * 0.08,
-              height: size * 0.08,
-              borderRadius: size * 0.04,
-              backgroundColor: colors.secondary,
-              left: `${30 + index * 20}%`,
-              opacity: 0.4,
+              translateY: interpolate(
+                particleAnim.value,
+                [0, 0.5, 1],
+                [-size * 0.3, -size * 0.6, -size * 0.3],
+                Extrapolate.CLAMP
+              ),
             },
-          ]}
-        />
-      ))}
+            {
+              translateX: interpolate(
+                particleAnim.value,
+                [0, 1],
+                [Math.cos((index * Math.PI) / 2) * size * 0.4, Math.cos((index * Math.PI) / 2) * size * 0.5],
+                Extrapolate.CLAMP
+              ),
+            },
+          ],
+          opacity: interpolate(particleAnim.value, [0, 0.5, 1], [0, 0.8, 0], Extrapolate.CLAMP),
+        }));
+
+        return (
+          <Animated.View
+            key={index}
+            style={[
+              styles.sparkle,
+              {
+                width: size * 0.06,
+                height: size * 0.06,
+                borderRadius: size * 0.03,
+              },
+              particleStyle,
+            ]}
+          />
+        );
+      })}
     </View>
   );
 }
