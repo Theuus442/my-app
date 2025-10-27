@@ -28,7 +28,6 @@ export default function HomeScreen() {
   const router = useRouter();
 
   const { isTablet } = require('@/utils/responsive').useDeviceSize();
-  const { moderateScale, scaleFont, containerMaxWidth } = require('@/utils/responsive');
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
