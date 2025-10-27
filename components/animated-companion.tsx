@@ -165,7 +165,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
             style={[
               styles.companion,
               {
-                width: size,
+                width: scaledSize,
                 height: size,
               },
             ]}>
