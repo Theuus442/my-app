@@ -32,12 +32,20 @@ export function QuickActionCard({
         },
         containerStyle,
       ]}
-      onPress={onPress}>
-      <View style={styles.header}>
+      onPress={onPress}
+      android_ripple={{ color: colors.primary + '20' }}>
+      <View style={styles.iconContainer}>
         <ThemedText style={styles.emoji}>{emoji}</ThemedText>
-        <ThemedText style={styles.title}>{title}</ThemedText>
       </View>
-      <ThemedText style={styles.description}>{description}</ThemedText>
+      <View style={styles.content}>
+        <ThemedText style={[styles.title, { color: colors.text }]}>{title}</ThemedText>
+        <ThemedText style={[styles.description, { color: colors.textSecondary }]}>
+          {description}
+        </ThemedText>
+      </View>
+      <View style={[styles.arrow, { backgroundColor: colors.primary + '15' }]}>
+        <ThemedText style={{ fontSize: 16 }}>→</ThemedText>
+      </View>
     </Pressable>
   );
 }
