@@ -21,11 +21,10 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
   const scaledSize = moderateScale(size);
   const colorScheme = useColorScheme();
 
-  // Wellness-based color: low = cool colors, high = warm colors
   const getWellnessColor = () => {
-    if (wellnessLevel < 40) return '#FF6B6B'; // Red/coral for low
-    if (wellnessLevel < 70) return '#FFD93D'; // Yellow for medium
-    return '#6BCB77'; // Green for high
+    if (wellnessLevel < 40) return '#FF6B6B';
+    if (wellnessLevel < 70) return '#FFD93D';
+    return '#6BCB77';
   };
 
   const floatAnim = useSharedValue(0);
@@ -74,7 +73,6 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
 
   return (
     <View style={styles.container}>
-      {/* Glow aura */}
       <Animated.View
         style={[
           styles.aura,
@@ -88,10 +86,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
         ]}
       />
 
-      {/* Main character */}
       <Animated.View style={[styles.characterContainer, floatAnimStyle]}>
         <Animated.View style={bobbleStyle}>
-          {/* Body - soft gradient shape */}
           <View
             style={[
               styles.body,
@@ -102,7 +98,6 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 backgroundColor: wellnessColor,
               },
             ]}>
-            {/* Body shine */}
             <View
               style={[
                 styles.shine,
@@ -115,7 +110,6 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
             />
           </View>
 
-          {/* Head - larger, cuter proportions */}
           <View
             style={[
               styles.head,
@@ -127,7 +121,6 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 top: scaledSize * -0.1,
               },
             ]}>
-            {/* Head shine */}
             <View
               style={[
                 styles.shine,
@@ -141,9 +134,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               ]}
             />
 
-            {/* Eyes container */}
             <View style={[styles.eyesContainer, { top: scaledSize * 0.15 }]}>
-              {/* Left eye */}
               <View
                 style={[
                   styles.eye,
@@ -176,7 +167,6 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 </View>
               </View>
 
-              {/* Right eye */}
               <View
                 style={[
                   styles.eye,
@@ -210,7 +200,6 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               </View>
             </View>
 
-            {/* Smile - simple arc */}
             <View
               style={[
                 styles.mouth,
@@ -224,11 +213,10 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   borderBottomRightRadius: scaledSize * 0.02,
                   backgroundColor: 'rgba(0, 0, 0, 0.15)',
                 },
-              />
-            )}
+              ]}
+            />
           </View>
 
-          {/* Floating sparkles */}
           <View
             style={[
               styles.sparkle,
