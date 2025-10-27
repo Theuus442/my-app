@@ -49,12 +49,12 @@ export function QuoteCard({ quote, onRefresh, containerStyle }: QuoteCardProps) 
         },
         containerStyle,
       ]}>
-      <View style={[styles.accentLine, { backgroundColor: colors.secondary }]} />
-      <View style={[styles.iconBadge, { backgroundColor: colors.secondary + '15', width: moderateScale(40), height: moderateScale(40), borderRadius: moderateScale(10) }]}>
+      <View style={[styles.accentLine, { backgroundColor: '#FFD93D' }]} />
+      <View style={[styles.iconBadge, { backgroundColor: '#FFD93D' + '25', width: moderateScale(40), height: moderateScale(40), borderRadius: moderateScale(10) }]}>
         <ThemedText style={[styles.quoteIcon, { fontSize: scaleFont(16) }]}>💡</ThemedText>
       </View>
       <View style={styles.content}>
-        <ThemedText style={[styles.label, { color: colors.textSecondary, fontSize: scaleFont(10) }]}>Inspiração</ThemedText>
+        <ThemedText style={[styles.label, { color: '#FFD93D', fontSize: scaleFont(10), fontWeight: '700' }]}>Inspiração</ThemedText>
         <ThemedText style={[styles.quoteText, { color: colors.text, fontSize: scaleFont(13), lineHeight: scaleFont(18) }]}>{quote}</ThemedText>
       </View>
       <Animated.View style={rotationStyle}>
@@ -65,14 +65,14 @@ export function QuoteCard({ quote, onRefresh, containerStyle }: QuoteCardProps) 
           style={[
             styles.refreshButton,
             {
-              backgroundColor: colors.secondary,
+              backgroundColor: '#FFD93D',
               width: moderateScale(36),
               height: moderateScale(36),
               borderRadius: moderateScale(10),
             },
           ]}
           onPress={handleRefresh}>
-          <IconSymbol size={16} name="arrow.clockwise" color="#FFFFFF" />
+          <IconSymbol size={16} name="arrow.clockwise" color="#2C3E50" />
         </Pressable>
       </Animated.View>
     </View>
