@@ -89,7 +89,7 @@ export default function MoodScreen() {
             Como você está se sentindo?
           </ThemedText>
           <View style={styles.moods}>
-            {MOODS.map((mood, index) => {
+            {MOOD_OPTIONS.map((mood, index) => {
               return (
                 <Animated.View key={mood.value} style={animStyles[index]}>
                   <Pressable
