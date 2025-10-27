@@ -151,6 +151,7 @@ export default function HomeScreen() {
               emoji="🧠"
               title="Meditação"
               description="5 minutos"
+              accentColor="#6BCB77"
               onPress={handleMeditationPress}
               containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
@@ -158,6 +159,7 @@ export default function HomeScreen() {
               emoji="💫"
               title="Gratidão"
               description="Registre bênçãos"
+              accentColor="#FF6B6B"
               onPress={handleGratitudePress}
               containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
@@ -165,6 +167,7 @@ export default function HomeScreen() {
               emoji="✨"
               title="Humor"
               description="Como se sente?"
+              accentColor="#4D96FF"
               onPress={handleMoodPress}
               containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
