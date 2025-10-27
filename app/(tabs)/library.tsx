@@ -179,6 +179,7 @@ export default function LibraryScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header */}
         <View style={styles.header}>
           <ThemedText style={[styles.title, { color: colors.text }]}>Biblioteca</ThemedText>
@@ -289,6 +290,7 @@ export default function LibraryScreen() {
             </Pressable>
           ))}
         </View>
+        </ResponsiveContainer>
 
         <View style={{ height: 20 }} />
       </ScrollView>
