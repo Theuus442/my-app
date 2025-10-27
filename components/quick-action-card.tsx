@@ -23,21 +23,22 @@ export function QuickActionCard({
   accentColor = '#6BCB77',
   onPress,
   containerStyle,
+  testID,
 }: QuickActionCardProps) {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   const [isPressed, setIsPressed] = useState(false);
   const scale = useSharedValue(1);
 
-  const handlePressIn = () => {
+  const handlePressIn = useCallback(() => {
     setIsPressed(true);
     scale.value = withSpring(0.96, { damping: 10, mass: 1 });
-  };
+  }, [scale]);
 
-  const handlePressOut = () => {
+  const handlePressOut = useCallback(() => {
     setIsPressed(false);
     scale.value = withSpring(1, { damping: 10, mass: 1 });
-  };
+  }, [scale]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
