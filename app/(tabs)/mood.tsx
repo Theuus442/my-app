@@ -171,16 +171,23 @@ export default function MoodScreen() {
 
         {/* Tips */}
         <View style={styles.section}>
-          <ThemedText style={styles.sectionTitle}>Dica do dia</ThemedText>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
+            Dica do dia
+          </ThemedText>
           <View
             style={[
               styles.tipCard,
-              { backgroundColor: colors.card, borderColor: colors.border },
+              {
+                backgroundColor: colors.secondary + '12',
+                borderColor: colors.secondary,
+              },
             ]}>
-            <ThemedText style={styles.tipTitle}>Respire Fundo</ThemedText>
-            <ThemedText style={styles.tipText}>
-              Independentemente do seu humor atual, lembre-se que é perfeitamente normal ter
-              dias ruins. Você é mais resiliente do que imagina! 💚
+            <ThemedText style={[styles.tipTitle, { color: colors.text }]}>
+              ✨ Respire Fundo
+            </ThemedText>
+            <ThemedText style={[styles.tipText, { color: colors.textSecondary }]}>
+              Independentemente do seu humor atual, lembre-se que é normal ter dias ruins. Você é
+              mais resiliente do que imagina! 💚
             </ThemedText>
           </View>
         </View>
