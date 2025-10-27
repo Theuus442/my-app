@@ -59,17 +59,17 @@ export function QuickActionCard({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         android_ripple={{ color: colors.primary + '1A' }}>
-        <View style={[styles.iconContainer, { backgroundColor: colors.secondary + '12', width: moderateScale(48), height: moderateScale(48), borderRadius: moderateScale(12) }]}>
+        <View style={[styles.iconContainer, { backgroundColor: accentColor + '20', width: moderateScale(48), height: moderateScale(48), borderRadius: moderateScale(12) }]}>
           <ThemedText style={[styles.emoji, { fontSize: scaleFont(20) }]}>{emoji}</ThemedText>
         </View>
         <View style={styles.content}>
-          <ThemedText style={[styles.title, { color: colors.text, fontSize: scaleFont(14) }]}>{title}</ThemedText>
+          <ThemedText style={[styles.title, { color: colors.text, fontSize: scaleFont(14), fontWeight: '700' }]}>{title}</ThemedText>
           <ThemedText style={[styles.description, { color: colors.textSecondary, fontSize: scaleFont(11) }]}>
             {description}
           </ThemedText>
         </View>
-        <View style={[styles.arrow, { backgroundColor: colors.primary + '1A', width: moderateScale(32), height: moderateScale(32), borderRadius: moderateScale(8) }]}>
-          <ThemedText style={[styles.arrowIcon, { color: colors.primary, fontSize: scaleFont(14) }]}>→</ThemedText>
+        <View style={[styles.arrow, { backgroundColor: accentColor + '15', width: moderateScale(32), height: moderateScale(32), borderRadius: moderateScale(8) }]}>
+          <ThemedText style={[styles.arrowIcon, { color: accentColor, fontSize: scaleFont(14), fontWeight: '700' }]}>→</ThemedText>
         </View>
       </Pressable>
     </Animated.View>
