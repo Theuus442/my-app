@@ -183,7 +183,7 @@ export default function MoodScreen() {
               },
             ]}>
             <ThemedText style={[styles.tipTitle, { color: colors.text }]}>
-              �� Respire Fundo
+              💫 Respire Fundo
             </ThemedText>
             <ThemedText style={[styles.tipText, { color: colors.textSecondary }]}>
               Independentemente do seu humor atual, lembre-se que é normal ter dias ruins. Você é
