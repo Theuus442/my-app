@@ -45,8 +45,9 @@ export function QuickActionCard({
   }));
 
   return (
-    <Animated.View style={animatedStyle} accessible accessibilityRole="button" accessibilityLabel={`${title}: ${description}`}>
+    <Animated.View style={animatedStyle} accessible accessibilityRole="button" accessibilityLabel={`${title}: ${description}`} testID={testID}>
       <Pressable
+        testID={testID && `${testID}-button`}
         style={[
           styles.container,
           {
