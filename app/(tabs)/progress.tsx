@@ -31,22 +31,6 @@ export default function ProgressScreen() {
   const averageMood = Math.round(moodEntries.reduce((sum, e) => sum + e.mood, 0) / moodEntries.length * 100) / 100;
   const unlockedAchievements = ACHIEVEMENTS.filter((a) => a.unlocked).length;
 
-  const getMoodEmoji = (mood: number) => {
-    switch (mood) {
-      case 1:
-        return '💔';
-      case 2:
-        return '😔';
-      case 3:
-        return '😌';
-      case 4:
-        return '😊';
-      case 5:
-        return '🌟';
-      default:
-        return '😐';
-    }
-  };
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
