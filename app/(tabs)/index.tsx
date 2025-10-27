@@ -135,11 +135,13 @@ export default function HomeScreen() {
         <WellnessBar level={wellnessLevel} containerStyle={{ maxWidth: isTablet ? 760 : '100%', marginHorizontal: isTablet ? 28 : 20 }} />
 
         {/* Quote Card */}
-        <QuoteCard
-          quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
-          onRefresh={handleRefreshQuote}
-          containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
-        />
+        <View style={{ paddingHorizontal: isTablet ? 28 : 0 }}>
+          <QuoteCard
+            quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
+            onRefresh={handleRefreshQuote}
+            containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
+          />
+        </View>
 
         {/* Quick Actions Section */}
         <View style={[styles.quickActionsSection, { paddingHorizontal: isTablet ? 28 : 20 }]}>
