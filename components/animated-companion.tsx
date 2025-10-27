@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withRepeat,
   withTiming,
+  withSpring,
   Easing,
+  interpolate,
+  Extrapolate,
 } from 'react-native-reanimated';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -13,203 +16,269 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 interface AnimatedCompanionProps {
   size?: number;
   wellnessLevel?: number;
-  containerStyle?: ViewStyle;
 }
 
-export function AnimatedCompanion({
-  size = 200,
-  wellnessLevel = 75,
-  containerStyle,
-}: AnimatedCompanionProps) {
+export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCompanionProps) {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
-  const scale = useSharedValue(1);
+  const floatAnim = useSharedValue(0);
+  const pulseAnim = useSharedValue(0);
+  const glowAnim = useSharedValue(0);
 
   useEffect(() => {
-    // Breathing animation: pulse from 1 to 1.1 over 3 seconds
-    scale.value = withRepeat(
-      withTiming(1.1, {
-        duration: 1500,
+    // Floating animation - smooth vertical movement
+    floatAnim.value = withRepeat(
+      withTiming(1, {
+        duration: 3000,
         easing: Easing.inOut(Easing.ease),
       }),
       -1,
       true
     );
-  }, [scale]);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
+    // Pulse animation for glow
+    pulseAnim.value = withRepeat(
+      withTiming(1, {
+        duration: 2000,
+        easing: Easing.inOut(Easing.ease),
+      }),
+      -1,
+      true
+    );
+
+    // Glow intensity
+    glowAnim.value = withRepeat(
+      withTiming(1, {
+        duration: 3500,
+        easing: Easing.inOut(Easing.ease),
+      }),
+      -1,
+      true
+    );
+  }, []);
+
+  const floatAnimStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(floatAnim.value, [0, 1], [0, -20], Extrapolate.CLAMP),
+      },
+    ],
+  }));
+
+  const scaleAnimStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        scale: interpolate(pulseAnim.value, [0, 1], [1, 1.08], Extrapolate.CLAMP),
+      },
+    ],
+  }));
+
+  const glowAnimStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(glowAnim.value, [0, 0.5, 1], [0.4, 0.8, 0.4], Extrapolate.CLAMP),
   }));
 
   return (
-    <View style={[styles.container, containerStyle]}>
-      {/* Glow effect background */}
-      <View
+    <View style={styles.container}>
+      {/* Multi-layer glow effect */}
+      <Animated.View
         style={[
-          styles.glowBackground,
+          styles.glowLayer1,
+          {
+            width: size * 1.5,
+            height: size * 1.5,
+            borderRadius: size * 0.75,
+            borderColor: colors.secondary,
+          },
+          glowAnimStyle,
+        ]}
+      />
+      <Animated.View
+        style={[
+          styles.glowLayer2,
           {
             width: size * 1.3,
             height: size * 1.3,
             borderRadius: size * 0.65,
-            backgroundColor: colors.secondary + '15',
+            borderColor: colors.primary,
           },
+          glowAnimStyle,
         ]}
       />
 
+      {/* Main companion container */}
       <Animated.View
         style={[
-          styles.companion,
-          {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-            backgroundColor: colors.secondary,
-          },
-          animatedStyle,
+          styles.companionWrapper,
+          floatAnimStyle,
+          scaleAnimStyle,
         ]}>
-        {/* Shine effect */}
         <View
           style={[
-            styles.shine,
+            styles.companion,
             {
-              width: size * 0.4,
-              height: size * 0.4,
-              borderRadius: size * 0.2,
-            },
-          ]}
-        />
-
-        {/* Head */}
-        <View
-          style={[
-            styles.head,
-            {
-              width: size * 0.5,
-              height: size * 0.5,
-              borderRadius: size * 0.25,
+              width: size,
+              height: size,
+              borderRadius: size / 2,
               backgroundColor: colors.primary,
             },
           ]}>
-          {/* Eyes */}
-          <View style={[styles.eyes]}>
+          {/* Gradient overlay shine */}
+          <View
+            style={[
+              styles.shine,
+              {
+                width: size * 0.35,
+                height: size * 0.35,
+                borderRadius: size * 0.175,
+              },
+            ]}
+          />
+
+          {/* Head - Modern geometric design */}
+          <View
+            style={[
+              styles.head,
+              {
+                width: size * 0.48,
+                height: size * 0.48,
+                borderRadius: size * 0.24,
+                backgroundColor: colors.secondary,
+              },
+            ]}>
+            {/* Eyes - Modern style */}
+            <View style={styles.eyesContainer}>
+              <View
+                style={[
+                  styles.eye,
+                  {
+                    width: size * 0.1,
+                    height: size * 0.1,
+                    borderRadius: size * 0.05,
+                  },
+                ]}>
+                <View
+                  style={[
+                    styles.pupil,
+                    {
+                      width: size * 0.05,
+                      height: size * 0.05,
+                      borderRadius: size * 0.025,
+                      backgroundColor: '#0A0E27',
+                    },
+                  ]}>
+                  <View style={styles.eyeHighlight} />
+                </View>
+              </View>
+
+              <View
+                style={[
+                  styles.eye,
+                  {
+                    width: size * 0.1,
+                    height: size * 0.1,
+                    borderRadius: size * 0.05,
+                  },
+                ]}>
+                <View
+                  style={[
+                    styles.pupil,
+                    {
+                      width: size * 0.05,
+                      height: size * 0.05,
+                      borderRadius: size * 0.025,
+                      backgroundColor: '#0A0E27',
+                    },
+                  ]}>
+                  <View style={styles.eyeHighlight} />
+                </View>
+              </View>
+            </View>
+
+            {/* Mouth - Happy smile with curve */}
             <View
               style={[
-                styles.eye,
+                styles.mouth,
                 {
-                  backgroundColor: '#FFFFFF',
-                  width: size * 0.09,
-                  height: size * 0.09,
-                  borderRadius: size * 0.045,
+                  width: size * 0.18,
+                  height: size * 0.08,
+                  borderRadius: size * 0.09,
+                  borderBottomColor: '#0A0E27',
+                  borderBottomWidth: size * 0.02,
                 },
-              ]}>
-              <View
-                style={[
-                  styles.pupil,
-                  {
-                    backgroundColor: '#1B5E3F',
-                    width: size * 0.05,
-                    height: size * 0.05,
-                    borderRadius: size * 0.025,
-                  },
-                ]}
-              />
-              <View
-                style={[
-                  styles.eyeShine,
-                  {
-                    width: size * 0.025,
-                    height: size * 0.025,
-                    borderRadius: size * 0.0125,
-                  },
-                ]}
-              />
-            </View>
-            <View
-              style={[
-                styles.eye,
-                {
-                  backgroundColor: '#FFFFFF',
-                  width: size * 0.09,
-                  height: size * 0.09,
-                  borderRadius: size * 0.045,
-                },
-              ]}>
-              <View
-                style={[
-                  styles.pupil,
-                  {
-                    backgroundColor: '#1B5E3F',
-                    width: size * 0.05,
-                    height: size * 0.05,
-                    borderRadius: size * 0.025,
-                  },
-                ]}
-              />
-              <View
-                style={[
-                  styles.eyeShine,
-                  {
-                    width: size * 0.025,
-                    height: size * 0.025,
-                    borderRadius: size * 0.0125,
-                  },
-                ]}
-              />
-            </View>
+              ]}
+            />
           </View>
 
-          {/* Mouth - Happy smile */}
+          {/* Body - Modern rounded rectangle */}
           <View
             style={[
-              styles.mouth,
+              styles.body,
               {
-                borderBottomColor: '#1B5E3F',
-                borderBottomWidth: size * 0.025,
-                width: size * 0.2,
-                borderRadius: size * 0.2,
+                width: size * 0.65,
+                height: size * 0.32,
+                borderRadius: size * 0.12,
+                backgroundColor: colors.gradientStart,
               },
-            ]}
-          />
+            ]}>
+            {/* Accent dots on body */}
+            <View
+              style={[
+                styles.bodyAccent,
+                {
+                  width: size * 0.08,
+                  height: size * 0.08,
+                  borderRadius: size * 0.04,
+                },
+              ]}
+            />
+            <View
+              style={[
+                styles.bodyAccent,
+                {
+                  width: size * 0.08,
+                  height: size * 0.08,
+                  borderRadius: size * 0.04,
+                  marginLeft: size * 0.35,
+                },
+              ]}
+            />
+          </View>
 
-          {/* Blush */}
+          {/* Wellness indicator ring */}
           <View
             style={[
-              styles.blush,
+              styles.wellnessRing,
               {
-                width: size * 0.08,
-                height: size * 0.08,
-                borderRadius: size * 0.04,
-              },
-            ]}
-          />
-          <View
-            style={[
-              styles.blush,
-              {
-                width: size * 0.08,
-                height: size * 0.08,
-                borderRadius: size * 0.04,
-                marginLeft: size * 0.25,
+                width: size,
+                height: size,
+                borderRadius: size / 2,
+                borderColor: colors.secondary,
+                borderWidth: 2,
+                opacity: wellnessLevel / 100 * 0.6,
               },
             ]}
           />
         </View>
+      </Animated.View>
 
-        {/* Body (lower half) */}
-        <View
+      {/* Floating particles effect */}
+      {[0, 1, 2].map((index) => (
+        <Animated.View
+          key={index}
           style={[
-            styles.body,
+            styles.particle,
             {
-              width: size * 0.7,
-              height: size * 0.35,
-              backgroundColor: colors.primary,
-              borderRadius: size * 0.12,
-              bottom: size * 0.02,
+              width: size * 0.08,
+              height: size * 0.08,
+              borderRadius: size * 0.04,
+              backgroundColor: colors.secondary,
+              left: `${30 + index * 20}%`,
+              opacity: 0.4,
             },
           ]}
         />
-      </Animated.View>
+      ))}
     </View>
   );
 }
@@ -218,53 +287,59 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 24,
   },
-  glowBackground: {
+  glowLayer1: {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: '-65%',
-    marginLeft: '-65%',
-    zIndex: 0,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
-  companion: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#2D9B6E',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-    elevation: 8,
-    zIndex: 5,
-  },
-  shine: {
+  glowLayer2: {
     position: 'absolute',
-    top: '15%',
-    left: '15%',
-    backgroundColor: '#FFFFFF',
-    opacity: 0.3,
-    zIndex: 1,
+    borderWidth: 1.5,
+    borderColor: 'transparent',
   },
-  head: {
-    position: 'absolute',
-    top: '15%',
+  companionWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
   },
-  eyes: {
-    flexDirection: 'row',
-    gap: 10,
+  companion: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#00C853',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
+    elevation: 15,
+  },
+  shine: {
     position: 'absolute',
-    top: '20%',
+    top: '12%',
+    left: '12%',
+    backgroundColor: '#FFFFFF',
+    opacity: 0.35,
+  },
+  head: {
+    position: 'absolute',
+    top: '14%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 20,
+  },
+  eyesContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    position: 'absolute',
+    top: '18%',
   },
   eye: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.15,
     shadowRadius: 2,
     elevation: 1,
   },
@@ -272,30 +347,42 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  eyeShine: {
+  eyeHighlight: {
     position: 'absolute',
-    top: '15%',
-    right: '15%',
+    width: '40%',
+    height: '40%',
     backgroundColor: '#FFFFFF',
-    opacity: 0.6,
+    borderRadius: 100,
+    top: '20%',
+    right: '20%',
+    opacity: 0.7,
   },
   mouth: {
     position: 'absolute',
-    bottom: '15%',
-  },
-  blush: {
-    position: 'absolute',
-    bottom: '25%',
-    left: '-10%',
-    backgroundColor: '#FF9B85',
-    opacity: 0.4,
+    bottom: '12%',
   },
   body: {
     position: 'absolute',
-    shadowColor: '#2D9B6E',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    elevation: 3,
+    bottom: '8%',
+    justifyContent: 'space-around',
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#00D4FF',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  bodyAccent: {
+    backgroundColor: '#FFFFFF',
+    opacity: 0.4,
+  },
+  wellnessRing: {
+    position: 'absolute',
+  },
+  particle: {
+    position: 'absolute',
+    bottom: -30,
   },
 });
