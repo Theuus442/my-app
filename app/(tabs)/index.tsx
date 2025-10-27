@@ -90,7 +90,7 @@ export default function HomeScreen() {
         <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
-              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05) }]}>
+              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05), fontWeight: '800' }]}>
               Olá, User! 🌟
             </ThemedText>
               <ThemedText style={[styles.dateTime, { color: colors.textSecondary, fontSize: dateSize, lineHeight: Math.round(dateSize * 1.2) }]}>
@@ -102,12 +102,12 @@ export default function HomeScreen() {
                 style={[
                   styles.settingsButton,
                   {
-                    backgroundColor: colors.card,
-                    borderColor: colors.border,
+                    backgroundColor: '#4D96FF' + '15',
+                    borderColor: '#4D96FF' + '30',
                   },
                 ]}
                 onPress={handleSettingsPress}>
-                <IconSymbol size={24} name="gear" color={colors.secondary} />
+                <IconSymbol size={24} name="gear" color="#4D96FF" />
               </Pressable>
             </Animated.View>
           </View>
