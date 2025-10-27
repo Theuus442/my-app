@@ -11,7 +11,6 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
-import { useDeviceSize } from '@/utils/responsive';
 
 const MOTIVATIONAL_QUOTES = [
   'Você é mais forte do que imagina! 💪',
