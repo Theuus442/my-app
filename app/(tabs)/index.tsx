@@ -66,36 +66,44 @@ export default function HomeScreen() {
     });
   };
 
+  const settingsBtnAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: settingsBtnScale.value }],
+  }));
+
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={{ flex: 1 }}>
-            <ThemedText style={[styles.greeting, { color: colors.text }]}>
-              Olá, User! 👋
-            </ThemedText>
-            <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
-              {getCurrentTime()}
-            </ThemedText>
+        {/* Header with Gradient Background */}
+        <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
+          <View style={styles.header}>
+            <View style={{ flex: 1 }}>
+              <ThemedText style={[styles.greeting, { color: colors.text }]}>
+                Olá, User! 👋
+              </ThemedText>
+              <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
+                {getCurrentTime()}
+              </ThemedText>
+            </View>
+            <Animated.View style={settingsBtnAnimStyle}>
+              <Pressable
+                style={[
+                  styles.settingsButton,
+                  {
+                    backgroundColor: colors.card,
+                    borderColor: colors.border,
+                  },
+                ]}
+                onPress={handleSettingsPress}>
+                <IconSymbol size={24} name="gear" color={colors.secondary} />
+              </Pressable>
+            </Animated.View>
           </View>
-          <Pressable
-            style={[
-              styles.settingsButton,
-              {
-                backgroundColor: colors.card,
-                borderColor: colors.border,
-              },
-            ]}
-            onPress={() => router.push('/(tabs)/settings')}>
-            <IconSymbol size={24} name="gear" color={colors.primary} />
-          </Pressable>
         </View>
 
-        {/* Companion Card */}
+        {/* Companion Card - Hero Section */}
         <View
           style={[
             styles.companionCard,
@@ -104,6 +112,7 @@ export default function HomeScreen() {
               borderColor: colors.border,
             },
           ]}>
+          <View style={styles.companionBackground} />
           <AnimatedCompanion size={160} wellnessLevel={wellnessLevel} />
         </View>
 
@@ -118,26 +127,28 @@ export default function HomeScreen() {
 
         {/* Quick Actions Section */}
         <View style={styles.quickActionsSection}>
-          <ThemedText style={styles.sectionTitle}>Ações Rápidas</ThemedText>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
+            Ações Rápidas
+          </ThemedText>
           <View style={styles.quickActionsGrid}>
             <QuickActionCard
               emoji="🧘"
-              title="Meditação Rápida"
-              description="5 min"
+              title="Meditação"
+              description="5 minutos"
               onPress={handleMeditationPress}
               containerStyle={styles.actionCard}
             />
             <QuickActionCard
               emoji="📝"
-              title="Diário de Gratidão"
+              title="Gratidão"
               description="Registre bênçãos"
               onPress={handleGratitudePress}
               containerStyle={styles.actionCard}
             />
             <QuickActionCard
               emoji="😊"
-              title="Como me sinto?"
-              description="Rastrear humor"
+              title="Humor"
+              description="Como se sente?"
               onPress={handleMoodPress}
               containerStyle={styles.actionCard}
             />
@@ -145,7 +156,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Spacing */}
-        <View style={{ height: 20 }} />
+        <View style={{ height: 24 }} />
       </ScrollView>
     </SafeAreaView>
   );
