@@ -91,7 +91,7 @@ const ARTICLES: Article[] = [
   },
 ];
 
-const CATEGORIES = ['Respiração', 'Gratidão', 'TCC', 'Artigos', 'Mindfulness'];
+const CATEGORIES = ['Respira��ão', 'Gratidão', 'TCC', 'Artigos', 'Mindfulness'];
 
 export default function LibraryScreen() {
   const colorScheme = useColorScheme();
@@ -351,14 +351,19 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   categoryChip: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-    borderWidth: 1,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 24,
+    borderWidth: 1.5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 2,
+    elevation: 1,
   },
   categoryChipText: {
     fontSize: 13,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   articlesContainer: {
     paddingHorizontal: 20,
