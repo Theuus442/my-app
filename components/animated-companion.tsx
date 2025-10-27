@@ -24,7 +24,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
   const floatAnim = useSharedValue(0);
   const pulseAnim = useSharedValue(0);
   const glowAnim = useSharedValue(0);
-  const rotateAnim = useSharedValue(0);
+  const bounceAnim = useSharedValue(0);
+  const eyeAnim = useSharedValue(0);
 
   useEffect(() => {
     // Floating animation - smooth vertical movement
@@ -37,10 +38,10 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
       true
     );
 
-    // Pulse animation for glow
+    // Pulse animation for body
     pulseAnim.value = withRepeat(
       withTiming(1, {
-        duration: 2500,
+        duration: 2000,
         easing: Easing.inOut(Easing.ease),
       }),
       -1,
@@ -57,21 +58,31 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
       true
     );
 
-    // Subtle rotation
-    rotateAnim.value = withRepeat(
+    // Bounce effect
+    bounceAnim.value = withRepeat(
       withTiming(1, {
-        duration: 20000,
-        easing: Easing.linear,
+        duration: 2500,
+        easing: Easing.inOut(Easing.ease),
       }),
       -1,
       true
     );
-  }, [floatAnim, pulseAnim, glowAnim, rotateAnim]);
+
+    // Eye blink and expression
+    eyeAnim.value = withRepeat(
+      withTiming(1, {
+        duration: 3000,
+        easing: Easing.inOut(Easing.ease),
+      }),
+      -1,
+      true
+    );
+  }, [floatAnim, pulseAnim, glowAnim, bounceAnim, eyeAnim]);
 
   const floatAnimStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateY: interpolate(floatAnim.value, [0, 0.5, 1], [0, -24, 0], Extrapolate.CLAMP),
+        translateY: interpolate(floatAnim.value, [0, 0.5, 1], [0, -28, 0], Extrapolate.CLAMP),
       },
     ],
   }));
@@ -79,19 +90,27 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
   const scaleAnimStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        scale: interpolate(pulseAnim.value, [0, 0.5, 1], [1, 1.12, 1], Extrapolate.CLAMP),
+        scale: interpolate(pulseAnim.value, [0, 0.5, 1], [1, 1.08, 1], Extrapolate.CLAMP),
       },
     ],
   }));
 
   const glowAnimStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(glowAnim.value, [0, 0.5, 1], [0.3, 0.9, 0.3], Extrapolate.CLAMP),
+    opacity: interpolate(glowAnim.value, [0, 0.5, 1], [0.4, 0.95, 0.4], Extrapolate.CLAMP),
   }));
 
-  const rotationStyle = useAnimatedStyle(() => ({
+  const bounceStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        rotate: `${interpolate(rotateAnim.value, [0, 1], [0, 360], Extrapolate.CLAMP)}deg`,
+        scaleY: interpolate(bounceAnim.value, [0, 0.25, 0.5, 1], [1, 0.98, 1.02, 1], Extrapolate.CLAMP),
+      },
+    ],
+  }));
+
+  const eyeScaleStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        scaleY: interpolate(eyeAnim.value, [0, 0.15, 0.3, 1], [1, 0.3, 1, 1], Extrapolate.CLAMP),
       },
     ],
   }));
