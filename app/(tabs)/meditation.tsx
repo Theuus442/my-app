@@ -188,7 +188,7 @@ export default function MeditationScreen() {
         showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <ThemedText style={styles.title}>Meditação</ThemedText>
+          <ThemedText style={[styles.title, { color: colors.text }]}>Meditação</ThemedText>
         </View>
 
         {/* Statistics */}
