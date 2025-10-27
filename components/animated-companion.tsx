@@ -98,26 +98,27 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
 
   return (
     <View style={styles.container}>
-      {/* Multi-layer glow effect */}
+      {/* Multi-layer glow effect with rotation */}
       <Animated.View
         style={[
           styles.glowLayer1,
           {
-            width: size * 1.5,
-            height: size * 1.5,
-            borderRadius: size * 0.75,
+            width: size * 1.6,
+            height: size * 1.6,
+            borderRadius: size * 0.8,
             borderColor: colors.secondary,
           },
           glowAnimStyle,
+          rotationStyle,
         ]}
       />
       <Animated.View
         style={[
           styles.glowLayer2,
           {
-            width: size * 1.3,
-            height: size * 1.3,
-            borderRadius: size * 0.65,
+            width: size * 1.35,
+            height: size * 1.35,
+            borderRadius: size * 0.675,
             borderColor: colors.primary,
           },
           glowAnimStyle,
