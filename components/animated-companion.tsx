@@ -166,7 +166,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               styles.companion,
               {
                 width: scaledSize,
-                height: size,
+                height: scaledSize,
               },
             ]}>
             {/* Main body background with gradient effect */}
