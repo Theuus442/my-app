@@ -199,6 +199,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   width: size * 0.55,
                   height: size * 0.6,
                   borderRadius: size * 0.3,
+                  backgroundColor: colors.secondary,
                 },
               ]}>
               {/* Head shine/highlight */}
