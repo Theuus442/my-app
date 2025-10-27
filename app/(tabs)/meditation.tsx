@@ -196,18 +196,40 @@ export default function MeditationScreen() {
           <View
             style={[
               styles.statBox,
-              { backgroundColor: colors.card, borderColor: colors.border },
+              {
+                backgroundColor: colors.card,
+                borderColor: colors.border,
+                shadowColor: colors.primary,
+              },
             ]}>
-            <ThemedText style={styles.statNumber}>{completedCount}</ThemedText>
-            <ThemedText style={styles.statLabel}>Sessões Completas</ThemedText>
+            <View style={[styles.statIcon, { backgroundColor: colors.primary + '20' }]}>
+              <ThemedText style={styles.statEmoji}>✅</ThemedText>
+            </View>
+            <ThemedText style={[styles.statNumber, { color: colors.primary }]}>
+              {completedCount}
+            </ThemedText>
+            <ThemedText style={[styles.statLabel, { color: colors.textSecondary }]}>
+              Sessões Completas
+            </ThemedText>
           </View>
           <View
             style={[
               styles.statBox,
-              { backgroundColor: colors.card, borderColor: colors.border },
+              {
+                backgroundColor: colors.card,
+                borderColor: colors.border,
+                shadowColor: colors.accent,
+              },
             ]}>
-            <ThemedText style={styles.statNumber}>{totalMinutes}</ThemedText>
-            <ThemedText style={styles.statLabel}>Minutos Totais</ThemedText>
+            <View style={[styles.statIcon, { backgroundColor: colors.accentBlue + '20' }]}>
+              <ThemedText style={styles.statEmoji}>🕐</ThemedText>
+            </View>
+            <ThemedText style={[styles.statNumber, { color: colors.accentBlue }]}>
+              {totalMinutes}
+            </ThemedText>
+            <ThemedText style={[styles.statLabel, { color: colors.textSecondary }]}>
+              Minutos Totais
+            </ThemedText>
           </View>
         </View>
 
