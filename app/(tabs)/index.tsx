@@ -132,21 +132,21 @@ export default function HomeScreen() {
           </ThemedText>
           <View style={styles.quickActionsGrid}>
             <QuickActionCard
-              emoji="🧘"
+              emoji="🧠"
               title="Meditação"
               description="5 minutos"
               onPress={handleMeditationPress}
               containerStyle={styles.actionCard}
             />
             <QuickActionCard
-              emoji="📝"
+              emoji="💫"
               title="Gratidão"
               description="Registre bênçãos"
               onPress={handleGratitudePress}
               containerStyle={styles.actionCard}
             />
             <QuickActionCard
-              emoji="😊"
+              emoji="✨"
               title="Humor"
               description="Como se sente?"
               onPress={handleMoodPress}
