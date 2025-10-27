@@ -8,7 +8,7 @@ import { scaleFont, moderateScale, clamp } from '@/utils/responsive';
 import { clampNumber } from '@/utils/helpers';
 
 interface WellnessBarProps {
-  level: number; // 0-100
+  level: number;
   containerStyle?: ViewStyle;
   label?: string;
   sublabel?: string;
@@ -30,7 +30,7 @@ export function WellnessBar({
 
   useEffect(() => {
     barWidth.value = withTiming(clampedLevel, {
-      duration: 1200,
+      duration: 1400,
       easing: Easing.out(Easing.cubic),
     });
   }, [clampedLevel, barWidth]);
@@ -38,6 +38,14 @@ export function WellnessBar({
   const animatedBarStyle = useAnimatedStyle(() => ({
     width: `${barWidth.value}%`,
   }));
+
+  const getWellnessColor = () => {
+    if (clampedLevel < 40) return '#FF6B6B';
+    if (clampedLevel < 70) return '#FFD93D';
+    return '#6BCB77';
+  };
+
+  const wellnessColor = getWellnessColor();
 
   return (
     <View
@@ -47,37 +55,108 @@ export function WellnessBar({
       accessibilityLabel={`${label} ${clampedLevel} por cento`}
       testID={testID}>
       <View style={styles.header}>
-        <View>
-          <ThemedText style={[styles.label, { color: '#6BCB77', fontSize: scaleFont(12), fontWeight: '700' }]}>
+        <View style={styles.labelContainer}>
+          <ThemedText
+            style={[
+              styles.label,
+              {
+                color: wellnessColor,
+                fontSize: scaleFont(12),
+                fontWeight: '700',
+              },
+            ]}>
             {label}
           </ThemedText>
-          <ThemedText style={[styles.subtitle, { color: colors.textSecondary, fontSize: scaleFont(11) }]}>
+          <ThemedText
+            style={[
+              styles.subtitle,
+              {
+                color: colors.textSecondary,
+                fontSize: scaleFont(11),
+                fontWeight: '500',
+              },
+            ]}>
             {sublabel}
           </ThemedText>
         </View>
-        <View style={[styles.percentageBadge, { backgroundColor: '#6BCB77' + '20' }]}>
-          <ThemedText style={[styles.percentage, { color: '#6BCB77', fontSize: scaleFont(14), fontWeight: '800' }]}>{clampedLevel}%</ThemedText>
+        <View
+          style={[
+            styles.percentageBadge,
+            {
+              backgroundColor: wellnessColor + '20',
+            },
+          ]}>
+          <ThemedText
+            style={[
+              styles.percentage,
+              {
+                color: wellnessColor,
+                fontSize: scaleFont(14),
+                fontWeight: '800',
+              },
+            ]}>
+            {clampedLevel}%
+          </ThemedText>
         </View>
       </View>
+
       <View
         style={[
-          styles.barBackground,
+          styles.barContainer,
           {
             backgroundColor: colors.border,
-            height: moderateScale(12),
-            borderRadius: moderateScale(6),
+            height: moderateScale(14),
+            borderRadius: moderateScale(7),
           },
         ]}>
         <Animated.View
           style={[
             styles.barFill,
             {
-              backgroundColor: '#6BCB77',
+              backgroundColor: wellnessColor,
             },
             animatedBarStyle,
           ]}
         />
-        <View style={[styles.barGlow, { backgroundColor: colors.secondary, width: moderateScale(40) }]} />
+        <View
+          style={[
+            styles.barGlow,
+            {
+              backgroundColor: wellnessColor,
+              width: moderateScale(48),
+            },
+          ]}
+        />
+      </View>
+
+      <View style={[styles.levelIndicators]}>
+        <View
+          style={[
+            styles.levelMarker,
+            { left: '0%', backgroundColor: '#FF6B6B' + '40' },
+          ]}>
+          <ThemedText style={[styles.levelText, { fontSize: scaleFont(9) }]}>
+            Baixo
+          </ThemedText>
+        </View>
+        <View
+          style={[
+            styles.levelMarker,
+            { left: '33%', backgroundColor: '#FFD93D' + '40' },
+          ]}>
+          <ThemedText style={[styles.levelText, { fontSize: scaleFont(9) }]}>
+            Médio
+          </ThemedText>
+        </View>
+        <View
+          style={[
+            styles.levelMarker,
+            { left: '66%', backgroundColor: '#6BCB77' + '40' },
+          ]}>
+          <ThemedText style={[styles.levelText, { fontSize: scaleFont(9) }]}>
+            Alto
+          </ThemedText>
+        </View>
       </View>
     </View>
   );
@@ -86,52 +165,58 @@ export function WellnessBar({
 const styles = StyleSheet.create({
   container: {
     gap: 12,
-    paddingHorizontal: 20,
-    marginVertical: 20,
+    paddingHorizontal: 0,
+    marginVertical: 0,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    gap: 12,
+  },
+  labelContainer: {
+    flex: 1,
+    gap: 2,
   },
   label: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '700',
     textTransform: 'uppercase',
-    letterSpacing: 0.3,
-    marginBottom: 2,
+    letterSpacing: 0.5,
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: '500',
   },
   percentageBadge: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   percentage: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '800',
     letterSpacing: -0.3,
   },
-  barBackground: {
-    height: 12,
-    borderRadius: 6,
+  barContainer: {
+    height: 14,
+    borderRadius: 7,
     overflow: 'hidden',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
     elevation: 2,
   },
   barFill: {
     height: '100%',
-    borderRadius: 6,
+    borderRadius: 7,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
     elevation: 2,
   },
   barGlow: {
@@ -139,8 +224,27 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    width: 40,
-    opacity: 0.3,
+    width: 48,
+    opacity: 0.25,
+    borderRadius: 7,
+  },
+  levelIndicators: {
+    position: 'relative',
+    height: 20,
+    justifyContent: 'flex-end',
+  },
+  levelMarker: {
+    position: 'absolute',
+    height: 16,
+    width: '31%',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 6,
+    opacity: 0.6,
+  },
+  levelText: {
+    fontSize: 9,
+    fontWeight: '600',
+    color: '#2C3E50',
   },
 });

@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { StyleSheet, View, ScrollView, Pressable, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
@@ -12,7 +12,6 @@ import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
 import { scaleFont, moderateScale, useDeviceSize } from '@/utils/responsive';
-import { ResponsiveContainer } from '@/components/responsive-container';
 import { MOTIVATIONAL_QUOTES } from '@/constants/data';
 import { getCurrentTime } from '@/utils/helpers';
 
@@ -21,16 +20,15 @@ export default function HomeScreen() {
   const colors = Colors[colorScheme ?? 'light'];
   const router = useRouter();
 
-  // lightweight device sizing hook
-  const { isTablet, isSmall, isWeb } = useDeviceSize();
+  const { isTablet, isSmall, isWeb, width } = useDeviceSize();
+  const screenWidth = width;
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const settingsBtnScale = useSharedValue(1);
 
-  // More conservative sizing for web, better for small screens
-  const greetingSize = scaleFont(isSmall ? 20 : isTablet && !isWeb ? 28 : 24);
-  const dateSize = scaleFont(isSmall ? 11 : isTablet && !isWeb ? 13 : 12);
+  const greetingSize = scaleFont(isSmall ? 22 : isTablet && !isWeb ? 28 : 26);
+  const dateSize = scaleFont(isSmall ? 12 : isTablet && !isWeb ? 13 : 12);
 
   const handleRefreshQuote = useCallback(() => {
     setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
@@ -55,10 +53,13 @@ export default function HomeScreen() {
     router.push('/(tabs)/mood');
   };
 
-
   const settingsBtnAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: settingsBtnScale.value }],
   }));
+
+  const isWideScreen = screenWidth > 768;
+  const contentMaxWidth = isWideScreen ? 1000 : screenWidth;
+  const sidePadding = isWideScreen ? moderateScale(32) : moderateScale(20);
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
@@ -66,15 +67,30 @@ export default function HomeScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        <ResponsiveContainer>
-        {/* Header with Gradient Background */}
-        <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
-          <View style={styles.header}>
+        {/* Header Section */}
+        <View style={[styles.headerWrapper, { paddingHorizontal: sidePadding }]}>
+          <View style={styles.headerContent}>
             <View style={{ flex: 1 }}>
-              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05), fontWeight: '800' }]}>
-              Olá, User! 🌟
-            </ThemedText>
-              <ThemedText style={[styles.dateTime, { color: colors.textSecondary, fontSize: dateSize, lineHeight: Math.round(dateSize * 1.2) }]}>
+              <ThemedText
+                style={[
+                  styles.greeting,
+                  {
+                    color: colors.text,
+                    fontSize: greetingSize,
+                    lineHeight: greetingSize * 1.1,
+                  },
+                ]}>
+                Olá, User! 🌟
+              </ThemedText>
+              <ThemedText
+                style={[
+                  styles.dateTime,
+                  {
+                    color: colors.textSecondary,
+                    fontSize: dateSize,
+                    marginTop: 8,
+                  },
+                ]}>
                 {getCurrentTime()}
               </ThemedText>
             </View>
@@ -83,81 +99,116 @@ export default function HomeScreen() {
                 style={[
                   styles.settingsButton,
                   {
-                    backgroundColor: '#4D96FF' + '15',
-                    borderColor: '#4D96FF' + '30',
+                    backgroundColor: colors.secondary + '12',
+                    borderColor: colors.secondary + '30',
                   },
                 ]}
-                onPress={handleSettingsPress}>
-                <IconSymbol size={24} name="gear" color="#4D96FF" />
+                onPress={handleSettingsPress}
+                android_ripple={{ color: colors.secondary + '20' }}>
+                <IconSymbol size={24} name="gear" color={colors.secondary} />
               </Pressable>
             </Animated.View>
           </View>
         </View>
 
-        {/* Companion Card - Hero Section */}
+        {/* Main Content Container */}
         <View
           style={[
-            styles.companionCard,
+            styles.contentContainer,
             {
-              backgroundColor: colors.card,
-              borderColor: colors.border,
-              paddingVertical: moderateScale(isTablet ? 32 : 20),
-              marginHorizontal: moderateScale(isTablet ? 24 : 16),
-              borderRadius: moderateScale(isTablet ? 28 : 20),
-              maxWidth: isTablet ? 600 : '100%',
+              maxWidth: contentMaxWidth,
+              alignSelf: 'center',
               width: '100%',
+              paddingHorizontal: sidePadding,
             },
           ]}>
-          <View style={styles.companionBackground} />
-          <AnimatedCompanion size={isTablet ? 140 : 110} wellnessLevel={wellnessLevel} />
-        </View>
+          {/* Companion Card - Hero Section */}
+          <View
+            style={[
+              styles.companionCard,
+              {
+                backgroundColor: colors.card,
+                borderColor: colors.border,
+              },
+            ]}>
+            <View style={styles.companionBackground} />
+            <AnimatedCompanion size={isTablet ? 150 : 120} wellnessLevel={wellnessLevel} />
+          </View>
 
-        {/* Wellness Bar */}
-        <WellnessBar level={wellnessLevel} containerStyle={{ maxWidth: isTablet ? 760 : '100%', marginHorizontal: isTablet ? 28 : 20 }} />
+          {/* Wellness Bar */}
+          <WellnessBar level={wellnessLevel} containerStyle={styles.wellnessBarContainer} />
 
-        {/* Quote Card */}
-        <View style={{ paddingHorizontal: isTablet ? 28 : 0 }}>
-          <QuoteCard
-            quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
-            onRefresh={handleRefreshQuote}
-            containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
-          />
-        </View>
+          {/* Quote Card */}
+          <View style={styles.quoteCardWrapper}>
+            <QuoteCard
+              quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
+              onRefresh={handleRefreshQuote}
+              containerStyle={styles.quoteCardContainer}
+            />
+          </View>
 
-        {/* Quick Actions Section */}
-        <View style={[styles.quickActionsSection, { paddingHorizontal: isTablet ? 28 : 20 }]}>
-          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>Ações Rápidas</ThemedText>
-          <View style={[styles.quickActionsGrid, { flexDirection: isTablet ? 'row' : 'column', gap: 12 }]}>
-            <QuickActionCard
-              emoji="🧠"
-              title="Meditação"
-              description="5 minutos"
-              accentColor="#6BCB77"
-              onPress={handleMeditationPress}
-              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
-            />
-            <QuickActionCard
-              emoji="💫"
-              title="Gratidão"
-              description="Registre bênçãos"
-              accentColor="#FF6B6B"
-              onPress={handleGratitudePress}
-              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
-            />
-            <QuickActionCard
-              emoji="✨"
-              title="Humor"
-              description="Como se sente?"
-              accentColor="#4D96FF"
-              onPress={handleMoodPress}
-              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
-            />
+          {/* Quick Actions Section */}
+          <View style={styles.quickActionsSection}>
+            <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
+              Ações Rápidas
+            </ThemedText>
+
+            {isWideScreen ? (
+              <View style={styles.actionsGridWide}>
+                <QuickActionCard
+                  emoji="🧠"
+                  title="Meditação"
+                  description="5 minutos"
+                  accentColor="#6BCB77"
+                  onPress={handleMeditationPress}
+                  containerStyle={styles.actionCardWide}
+                />
+                <QuickActionCard
+                  emoji="💫"
+                  title="Gratidão"
+                  description="Registre bênçãos"
+                  accentColor="#FF6B6B"
+                  onPress={handleGratitudePress}
+                  containerStyle={styles.actionCardWide}
+                />
+                <QuickActionCard
+                  emoji="✨"
+                  title="Humor"
+                  description="Como se sente?"
+                  accentColor="#4D96FF"
+                  onPress={handleMoodPress}
+                  containerStyle={styles.actionCardWide}
+                />
+              </View>
+            ) : (
+              <View style={styles.actionsGridMobile}>
+                <QuickActionCard
+                  emoji="🧠"
+                  title="Meditação"
+                  description="5 minutos"
+                  accentColor="#6BCB77"
+                  onPress={handleMeditationPress}
+                />
+                <QuickActionCard
+                  emoji="💫"
+                  title="Gratidão"
+                  description="Registre bênçãos"
+                  accentColor="#FF6B6B"
+                  onPress={handleGratitudePress}
+                />
+                <QuickActionCard
+                  emoji="✨"
+                  title="Humor"
+                  description="Como se sente?"
+                  accentColor="#4D96FF"
+                  onPress={handleMoodPress}
+                />
+              </View>
+            )}
           </View>
         </View>
 
-        {/* Spacing */}
-        </ResponsiveContainer>
-        <View style={{ height: 24 }} />
+        <View style={{ height: 40 }} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -171,56 +222,55 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 40,
+    flexGrow: 1,
+    paddingVertical: moderateScale(8),
   },
-  headerContainer: {
-    paddingBottom: 4,
+  headerWrapper: {
+    paddingVertical: moderateScale(12),
+    paddingTop: moderateScale(16),
   },
-  header: {
+  headerContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    paddingHorizontal: 20,
-    paddingTop: 24,
-    paddingBottom: 16,
+    gap: 16,
   },
   greeting: {
-    fontSize: 34,
     fontWeight: '800',
-    marginBottom: 8,
-    letterSpacing: -0.7,
+    letterSpacing: -0.8,
   },
   dateTime: {
-    fontSize: 13,
     fontWeight: '500',
     letterSpacing: -0.2,
   },
   settingsButton: {
-    width: 54,
-    height: 54,
-    borderRadius: 27,
+    width: 52,
+    height: 52,
+    borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1.5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  contentContainer: {
+    gap: 20,
   },
   companionCard: {
-    marginHorizontal: 20,
-    marginVertical: 20,
-    paddingVertical: 40,
-    borderRadius: 32,
+    borderRadius: 28,
     borderWidth: 1,
+    paddingVertical: moderateScale(28),
+    paddingHorizontal: moderateScale(20),
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.15,
-    shadowRadius: 20,
-    elevation: 6,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 5,
     overflow: 'hidden',
   },
   companionBackground: {
@@ -229,22 +279,38 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    opacity: 0.02,
+    opacity: 0.03,
   },
-  quickActionsSection: {
-    paddingHorizontal: 20,
-    marginTop: 16,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '800',
-    marginBottom: 16,
-    letterSpacing: -0.3,
-  },
-  quickActionsGrid: {
+  wellnessBarContainer: {
+    paddingHorizontal: 0,
+    marginVertical: 0,
     gap: 12,
   },
-  actionCard: {
-    minHeight: 92,
+  quoteCardWrapper: {
+    marginHorizontal: -4,
+  },
+  quoteCardContainer: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+  },
+  quickActionsSection: {
+    gap: 16,
+    paddingBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '800',
+    letterSpacing: -0.4,
+  },
+  actionsGridMobile: {
+    gap: 12,
+  },
+  actionsGridWide: {
+    flexDirection: 'row',
+    gap: 16,
+  },
+  actionCardWide: {
+    flex: 1,
+    minHeight: 100,
   },
 });

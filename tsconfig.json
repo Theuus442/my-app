@@ -1,13 +1,30 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "expo/tsconfig",
   "compilerOptions": {
     "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-native",
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": [
+      "ES2020"
+    ],
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
       ]
     }
   },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ],
   "include": [
     "**/*.ts",
     "**/*.tsx",
