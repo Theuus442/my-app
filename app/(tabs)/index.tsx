@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
 import { AnimatedCompanion } from '@/components/animated-companion';
 import { WellnessBar } from '@/components/wellness-bar';
@@ -28,10 +29,18 @@ export default function HomeScreen() {
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const settingsBtnScale = useSharedValue(1);
 
   const handleRefreshQuote = useCallback(() => {
     setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
   }, []);
+
+  const handleSettingsPress = () => {
+    settingsBtnScale.value = withSpring(0.9, { damping: 10, mass: 1 }, () => {
+      settingsBtnScale.value = withSpring(1);
+    });
+    router.push('/(tabs)/settings');
+  };
 
   const handleMeditationPress = () => {
     router.push('/(tabs)/meditation');
@@ -57,36 +66,44 @@ export default function HomeScreen() {
     });
   };
 
+  const settingsBtnAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: settingsBtnScale.value }],
+  }));
+
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={{ flex: 1 }}>
-            <ThemedText style={[styles.greeting, { color: colors.text }]}>
-              Olá, User! 👋
+        {/* Header with Gradient Background */}
+        <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
+          <View style={styles.header}>
+            <View style={{ flex: 1 }}>
+              <ThemedText style={[styles.greeting, { color: colors.text }]}>
+              Olá, User! 🌟
             </ThemedText>
-            <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
-              {getCurrentTime()}
-            </ThemedText>
+              <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
+                {getCurrentTime()}
+              </ThemedText>
+            </View>
+            <Animated.View style={settingsBtnAnimStyle}>
+              <Pressable
+                style={[
+                  styles.settingsButton,
+                  {
+                    backgroundColor: colors.card,
+                    borderColor: colors.border,
+                  },
+                ]}
+                onPress={handleSettingsPress}>
+                <IconSymbol size={24} name="gear" color={colors.secondary} />
+              </Pressable>
+            </Animated.View>
           </View>
-          <Pressable
-            style={[
-              styles.settingsButton,
-              {
-                backgroundColor: colors.card,
-                borderColor: colors.border,
-              },
-            ]}
-            onPress={() => router.push('/(tabs)/settings')}>
-            <IconSymbol size={24} name="gear" color={colors.primary} />
-          </Pressable>
         </View>
 
-        {/* Companion Card */}
+        {/* Companion Card - Hero Section */}
         <View
           style={[
             styles.companionCard,
@@ -95,6 +112,7 @@ export default function HomeScreen() {
               borderColor: colors.border,
             },
           ]}>
+          <View style={styles.companionBackground} />
           <AnimatedCompanion size={160} wellnessLevel={wellnessLevel} />
         </View>
 
@@ -109,26 +127,28 @@ export default function HomeScreen() {
 
         {/* Quick Actions Section */}
         <View style={styles.quickActionsSection}>
-          <ThemedText style={styles.sectionTitle}>Ações Rápidas</ThemedText>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
+            Ações Rápidas
+          </ThemedText>
           <View style={styles.quickActionsGrid}>
             <QuickActionCard
-              emoji="🧘"
-              title="Meditação Rápida"
-              description="5 min"
+              emoji="🧠"
+              title="Meditação"
+              description="5 minutos"
               onPress={handleMeditationPress}
               containerStyle={styles.actionCard}
             />
             <QuickActionCard
-              emoji="📝"
-              title="Diário de Gratidão"
+              emoji="💫"
+              title="Gratidão"
               description="Registre bênçãos"
               onPress={handleGratitudePress}
               containerStyle={styles.actionCard}
             />
             <QuickActionCard
-              emoji="😊"
-              title="Como me sinto?"
-              description="Rastrear humor"
+              emoji="✨"
+              title="Humor"
+              description="Como se sente?"
               onPress={handleMoodPress}
               containerStyle={styles.actionCard}
             />
@@ -136,7 +156,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Spacing */}
-        <View style={{ height: 20 }} />
+        <View style={{ height: 24 }} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -152,65 +172,78 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 40,
   },
+  headerContainer: {
+    paddingBottom: 4,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 24,
+    paddingBottom: 16,
   },
   greeting: {
-    fontSize: 28,
+    fontSize: 34,
     fontWeight: '800',
-    marginBottom: 6,
-    letterSpacing: -0.5,
+    marginBottom: 8,
+    letterSpacing: -0.7,
   },
   dateTime: {
     fontSize: 13,
     fontWeight: '500',
+    letterSpacing: -0.2,
   },
   settingsButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 54,
+    height: 54,
+    borderRadius: 27,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1.5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    elevation: 4,
   },
   companionCard: {
     marginHorizontal: 20,
-    marginVertical: 16,
-    paddingVertical: 24,
-    borderRadius: 24,
+    marginVertical: 20,
+    paddingVertical: 40,
+    borderRadius: 32,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.15,
+    shadowRadius: 20,
+    elevation: 6,
+    overflow: 'hidden',
+  },
+  companionBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    opacity: 0.02,
   },
   quickActionsSection: {
     paddingHorizontal: 20,
-    marginTop: 8,
+    marginTop: 16,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: '700',
-    marginBottom: 14,
-    color: '#2C3E50',
+    fontWeight: '800',
+    marginBottom: 16,
+    letterSpacing: -0.3,
   },
   quickActionsGrid: {
     gap: 12,
   },
   actionCard: {
-    minHeight: 85,
+    minHeight: 92,
   },
 });

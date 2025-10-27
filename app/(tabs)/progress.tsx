@@ -24,42 +24,42 @@ const ACHIEVEMENTS: Achievement[] = [
     id: '1',
     title: 'Primeiro Passo',
     description: 'Completar primeira meditação',
-    icon: '🌱',
+    icon: '⭐',
     unlocked: true,
   },
   {
     id: '2',
     title: 'Uma Semana',
     description: '7 dias consecutivos',
-    icon: '📅',
+    icon: '✨',
     unlocked: true,
   },
   {
     id: '3',
     title: 'Dedicado',
     description: '30 dias consecutivos',
-    icon: '🏆',
+    icon: '🔥',
     unlocked: false,
   },
   {
     id: '4',
     title: 'Mestre da Meditação',
     description: '100 minutos totais',
-    icon: '👑',
+    icon: '💎',
     unlocked: false,
   },
   {
     id: '5',
     title: 'Grato',
     description: 'Registrar 10 itens de gratidão',
-    icon: '🙏',
+    icon: '💫',
     unlocked: true,
   },
   {
     id: '6',
     title: 'Equilibrado',
     description: 'Manter humor em 80%+',
-    icon: '⚖️',
+    icon: '🌈',
     unlocked: false,
   },
 ];
@@ -88,15 +88,15 @@ export default function ProgressScreen() {
   const getMoodEmoji = (mood: number) => {
     switch (mood) {
       case 1:
-        return '😢';
+        return '💔';
       case 2:
         return '😔';
       case 3:
-        return '😐';
+        return '😌';
       case 4:
-        return '🙂';
+        return '😊';
       case 5:
-        return '😄';
+        return '🌟';
       default:
         return '😐';
     }
