@@ -67,6 +67,7 @@ export default function SettingsScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header */}
         <View style={styles.header}>
           <Pressable onPress={() => router.push('/(tabs)/')}>
@@ -180,6 +181,7 @@ export default function SettingsScreen() {
           </Pressable>
         </View>
 
+        </ResponsiveContainer>
         <View style={{ height: 20 }} />
       </ScrollView>
     </SafeAreaView>
