@@ -1,70 +1,71 @@
 /**
- * PsiCompanion - Premium Wellness App Design System
- * Carefully crafted color palette for mental health and well-being
+ * PsiCompanion - 2025 Modern Premium Design System
+ * Vibrant, sophisticated color palette with glassmorphism support
  */
 
 import { Platform } from 'react-native';
 
-// Premium wellness color palette
-const primaryGreen = '#2D9B6E';
-const secondaryGreen = '#5ECB99';
-const lightGreen = '#A8E6C4';
-const paleGreen = '#F0FAF7';
-const darkGreen = '#1B5E3F';
+// Modern 2025 vibrant palette
+const primaryGradientStart = '#00D4FF';
+const primaryGradientEnd = '#0099CC';
+const accentGreen = '#00C853';
+const accentPurple = '#9C27B0';
+const accentOrange = '#FF6B35';
+const accentPink = '#FF1493';
 
-const accentPeach = '#FF9B85';
-const accentBlue = '#6DD5ED';
-const accentYellow = '#FFD89B';
-
-const tintColorLight = primaryGreen;
-const tintColorDark = secondaryGreen;
+const darkBg = '#0A0E27';
+const lightBg = '#F5F8FF';
 
 export const Colors = {
   light: {
-    text: '#2C3E50',
-    textSecondary: '#546E7A',
-    background: '#F8FDFB',
-    tint: tintColorLight,
-    icon: '#5ECB99',
-    tabIconDefault: '#B0BEC5',
-    tabIconSelected: primaryGreen,
-    primary: primaryGreen,
-    secondary: secondaryGreen,
-    accent: accentPeach,
-    accentBlue: accentBlue,
-    accentYellow: accentYellow,
+    text: '#0A0E27',
+    textSecondary: '#525E7F',
+    background: lightBg,
+    gradientStart: primaryGradientStart,
+    gradientEnd: primaryGradientEnd,
+    tint: primaryGradientStart,
+    icon: accentGreen,
+    tabIconDefault: '#9E9E9E',
+    tabIconSelected: primaryGradientStart,
+    primary: accentGreen,
+    secondary: primaryGradientStart,
+    accent: accentOrange,
+    accentPurple: accentPurple,
+    accentPink: accentPink,
     card: '#FFFFFF',
-    cardGradientStart: '#FFFFFF',
-    cardGradientEnd: '#F5FFFE',
-    border: '#D4EFE3',
-    divider: '#E0E0E0',
-    success: primaryGreen,
+    cardGlassOpacity: 0.8,
+    glassmorphismBg: 'rgba(255, 255, 255, 0.7)',
+    border: 'rgba(0, 200, 83, 0.2)',
+    divider: '#E8E8E8',
+    success: accentGreen,
     warning: '#FF9800',
-    error: '#E74C3C',
-    overlay: '#000000',
+    error: '#FF1744',
+    overlay: 'rgba(10, 14, 39, 0.5)',
   },
   dark: {
-    text: '#ECF0F1',
-    textSecondary: '#BDC3C7',
-    background: '#0F1419',
-    tint: tintColorDark,
-    icon: '#5ECB99',
-    tabIconDefault: '#66BB6A',
-    tabIconSelected: secondaryGreen,
-    primary: primaryGreen,
-    secondary: secondaryGreen,
-    accent: accentPeach,
-    accentBlue: accentBlue,
-    accentYellow: accentYellow,
-    card: '#1A2027',
-    cardGradientStart: '#1A2027',
-    cardGradientEnd: '#0F1419',
-    border: '#2C5F48',
-    divider: '#37474F',
-    success: secondaryGreen,
+    text: '#F5F8FF',
+    textSecondary: '#B0B9D4',
+    background: darkBg,
+    gradientStart: primaryGradientStart,
+    gradientEnd: primaryGradientEnd,
+    tint: primaryGradientStart,
+    icon: accentGreen,
+    tabIconDefault: '#666D7F',
+    tabIconSelected: primaryGradientStart,
+    primary: accentGreen,
+    secondary: primaryGradientStart,
+    accent: accentOrange,
+    accentPurple: accentPurple,
+    accentPink: accentPink,
+    card: '#1A1F3A',
+    cardGlassOpacity: 0.6,
+    glassmorphismBg: 'rgba(26, 31, 58, 0.6)',
+    border: 'rgba(0, 200, 83, 0.2)',
+    divider: '#2A2F4A',
+    success: accentGreen,
     warning: '#FFB74D',
-    error: '#EF5350',
-    overlay: '#FFFFFF',
+    error: '#FF1744',
+    overlay: 'rgba(245, 248, 255, 0.3)',
   },
 };
 
