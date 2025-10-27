@@ -81,8 +81,8 @@ export default function HomeScreen() {
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
               <ThemedText style={[styles.greeting, { color: colors.text }]}>
-                Olá, User! 👋
-              </ThemedText>
+              Olá, User! 🌟
+            </ThemedText>
               <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
                 {getCurrentTime()}
               </ThemedText>
