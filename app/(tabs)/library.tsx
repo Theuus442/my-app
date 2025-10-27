@@ -147,6 +147,7 @@ export default function LibraryScreen() {
             </Pressable>
           </View>
 
+          <ResponsiveContainer>
           <View style={styles.articleContent}>
             <ThemedText style={styles.articleCategory}>{selectedArticle.category}</ThemedText>
             <ThemedText style={styles.articleTitle}>{selectedArticle.title}</ThemedText>
@@ -164,6 +165,7 @@ export default function LibraryScreen() {
               {selectedArticle.content} {selectedArticle.content}
             </ThemedText>
           </View>
+          </ResponsiveContainer>
 
           <View style={{ height: 20 }} />
         </ScrollView>
