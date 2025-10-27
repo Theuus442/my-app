@@ -13,14 +13,13 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
 import { scaleFont, moderateScale, useDeviceSize } from '@/utils/responsive';
 import { ResponsiveContainer } from '@/components/responsive-container';
-import { useDeviceSize } from '@/utils/responsive';
 
 const MOTIVATIONAL_QUOTES = [
   'Você é mais forte do que imagina! 💪',
   'Respire fundo. Você está no controle. 🌬️',
   'Cada pequeno passo importa. Continue! 🚶',
   'Hoje é um novo começo. Aproveite! ☀️',
-  'Você merece cuidar de si mesmo. 💚',
+  'Você merece cuidar de si mesmo. ���',
   'Está tudo bem não estar bem o tempo todo. 🤗',
   'Seu progresso é válido, por menor que seja. 📈',
 ];
@@ -31,14 +30,15 @@ export default function HomeScreen() {
   const router = useRouter();
 
   // lightweight device sizing hook
-  const { isTablet, isSmall } = useDeviceSize();
+  const { isTablet, isSmall, isWeb } = useDeviceSize();
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const settingsBtnScale = useSharedValue(1);
 
-  const greetingSize = scaleFont(isSmall ? 26 : isTablet ? 34 : 30);
-  const dateSize = scaleFont(isSmall ? 12 : isTablet ? 14 : 13);
+  // More conservative sizing for web, better for small screens
+  const greetingSize = scaleFont(isSmall ? 20 : isTablet && !isWeb ? 28 : 24);
+  const dateSize = scaleFont(isSmall ? 11 : isTablet && !isWeb ? 13 : 12);
 
   const handleRefreshQuote = useCallback(() => {
     setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
@@ -90,7 +90,7 @@ export default function HomeScreen() {
         <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
-              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05) }]}>
+              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05), fontWeight: '800' }]}>
               Olá, User! 🌟
             </ThemedText>
               <ThemedText style={[styles.dateTime, { color: colors.textSecondary, fontSize: dateSize, lineHeight: Math.round(dateSize * 1.2) }]}>
@@ -102,12 +102,12 @@ export default function HomeScreen() {
                 style={[
                   styles.settingsButton,
                   {
-                    backgroundColor: colors.card,
-                    borderColor: colors.border,
+                    backgroundColor: '#4D96FF' + '15',
+                    borderColor: '#4D96FF' + '30',
                   },
                 ]}
                 onPress={handleSettingsPress}>
-                <IconSymbol size={24} name="gear" color={colors.secondary} />
+                <IconSymbol size={24} name="gear" color="#4D96FF" />
               </Pressable>
             </Animated.View>
           </View>
@@ -120,26 +120,28 @@ export default function HomeScreen() {
             {
               backgroundColor: colors.card,
               borderColor: colors.border,
-              paddingVertical: moderateScale(isTablet ? 36 : 22),
-              marginHorizontal: moderateScale(isTablet ? 28 : 20),
-              borderRadius: moderateScale(isTablet ? 32 : 24),
-              maxWidth: isTablet ? 820 : '100%',
+              paddingVertical: moderateScale(isTablet ? 32 : 20),
+              marginHorizontal: moderateScale(isTablet ? 24 : 16),
+              borderRadius: moderateScale(isTablet ? 28 : 20),
+              maxWidth: isTablet ? 600 : '100%',
               width: '100%',
             },
           ]}>
           <View style={styles.companionBackground} />
-          <AnimatedCompanion size={isTablet ? 180 : 140} wellnessLevel={wellnessLevel} />
+          <AnimatedCompanion size={isTablet ? 140 : 110} wellnessLevel={wellnessLevel} />
         </View>
 
         {/* Wellness Bar */}
         <WellnessBar level={wellnessLevel} containerStyle={{ maxWidth: isTablet ? 760 : '100%', marginHorizontal: isTablet ? 28 : 20 }} />
 
         {/* Quote Card */}
-        <QuoteCard
-          quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
-          onRefresh={handleRefreshQuote}
-          containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
-        />
+        <View style={{ paddingHorizontal: isTablet ? 28 : 0 }}>
+          <QuoteCard
+            quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
+            onRefresh={handleRefreshQuote}
+            containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
+          />
+        </View>
 
         {/* Quick Actions Section */}
         <View style={[styles.quickActionsSection, { paddingHorizontal: isTablet ? 28 : 20 }]}>
@@ -149,6 +151,7 @@ export default function HomeScreen() {
               emoji="🧠"
               title="Meditação"
               description="5 minutos"
+              accentColor="#6BCB77"
               onPress={handleMeditationPress}
               containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
@@ -156,6 +159,7 @@ export default function HomeScreen() {
               emoji="💫"
               title="Gratidão"
               description="Registre bênçãos"
+              accentColor="#FF6B6B"
               onPress={handleGratitudePress}
               containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
@@ -163,6 +167,7 @@ export default function HomeScreen() {
               emoji="✨"
               title="Humor"
               description="Como se sente?"
+              accentColor="#4D96FF"
               onPress={handleMoodPress}
               containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
