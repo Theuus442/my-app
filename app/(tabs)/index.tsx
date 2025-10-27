@@ -11,6 +11,7 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
+import { scaleFont, moderateScale, useDeviceSize } from '@/utils/responsive';
 import { ResponsiveContainer } from '@/components/responsive-container';
 import { useDeviceSize } from '@/utils/responsive';
 
@@ -87,7 +88,7 @@ export default function HomeScreen() {
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
               <ThemedText style={[styles.greeting, { color: colors.text }]}>
-              Olá, User! ��
+              Olá, User! 🌟
             </ThemedText>
               <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
                 {getCurrentTime()}
