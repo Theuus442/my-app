@@ -1,29 +1,51 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * PsiCompanion - Wellness App Color Palette
+ * Colors are defined in light and dark modes for mental health/wellness theme
  */
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+// Primary wellness colors
+const primaryGreen = '#4CAF50';
+const secondaryGreen = '#81C784';
+const lightBackground = '#E8F5E9';
+const darkGreen = '#2E7D32';
+
+const tintColorLight = primaryGreen;
+const tintColorDark = secondaryGreen;
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: '#1B5E20',
+    background: lightBackground,
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    icon: '#558B2F',
+    tabIconDefault: '#9CCC65',
+    tabIconSelected: primaryGreen,
+    primary: primaryGreen,
+    secondary: secondaryGreen,
+    accent: '#FBC02D',
+    card: '#FFFFFF',
+    border: '#C8E6C9',
+    success: '#4CAF50',
+    warning: '#FF9800',
+    error: '#F44336',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: '#C8E6C9',
+    background: '#1B5E20',
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    icon: '#81C784',
+    tabIconDefault: '#66BB6A',
+    tabIconSelected: secondaryGreen,
+    primary: primaryGreen,
+    secondary: secondaryGreen,
+    accent: '#FBC02D',
+    card: '#2E7D32',
+    border: '#558B2F',
+    success: '#81C784',
+    warning: '#FFB74D',
+    error: '#EF5350',
   },
 };
 
