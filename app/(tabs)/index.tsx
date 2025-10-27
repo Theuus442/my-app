@@ -20,7 +20,7 @@ const MOTIVATIONAL_QUOTES = [
   'Respire fundo. Você está no controle. 🌬️',
   'Cada pequeno passo importa. Continue! 🚶',
   'Hoje é um novo começo. Aproveite! ☀️',
-  'Você merece cuidar de si mesmo. 💚',
+  'Você merece cuidar de si mesmo. ��',
   'Está tudo bem não estar bem o tempo todo. 🤗',
   'Seu progresso é válido, por menor que seja. 📈',
 ];
@@ -90,10 +90,10 @@ export default function HomeScreen() {
         <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
-              <ThemedText style={[styles.greeting, { color: colors.text }]}>
+              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05) }]}>
               Olá, User! 🌟
             </ThemedText>
-              <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
+              <ThemedText style={[styles.dateTime, { color: colors.textSecondary, fontSize: dateSize, lineHeight: Math.round(dateSize * 1.2) }]}>
                 {getCurrentTime()}
               </ThemedText>
             </View>
