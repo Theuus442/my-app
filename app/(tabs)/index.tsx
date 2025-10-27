@@ -65,9 +65,13 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <View>
-            <ThemedText style={styles.greeting}>Olá, User! 👋</ThemedText>
-            <ThemedText style={styles.dateTime}>{getCurrentTime()}</ThemedText>
+          <View style={{ flex: 1 }}>
+            <ThemedText style={[styles.greeting, { color: colors.text }]}>
+              Olá, User! 👋
+            </ThemedText>
+            <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
+              {getCurrentTime()}
+            </ThemedText>
           </View>
           <Pressable
             style={[
@@ -82,8 +86,17 @@ export default function HomeScreen() {
           </Pressable>
         </View>
 
-        {/* Animated Companion */}
-        <AnimatedCompanion size={180} wellnessLevel={wellnessLevel} />
+        {/* Companion Card */}
+        <View
+          style={[
+            styles.companionCard,
+            {
+              backgroundColor: colors.card,
+              borderColor: colors.border,
+            },
+          ]}>
+          <AnimatedCompanion size={160} wellnessLevel={wellnessLevel} />
+        </View>
 
         {/* Wellness Bar */}
         <WellnessBar level={wellnessLevel} />
