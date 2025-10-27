@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from 'react';
+import { Article } from '@/types';
+import { ARTICLES, LIBRARY_CATEGORIES } from '@/constants/data';
 import { StyleSheet, View, ScrollView, Pressable, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
