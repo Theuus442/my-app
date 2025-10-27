@@ -6,64 +6,9 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ResponsiveContainer } from '@/components/responsive-container';
-
-interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  unlocked: boolean;
-}
-
-interface MoodEntry {
-  date: Date;
-  mood: number; // 1-5
-}
-
-const ACHIEVEMENTS: Achievement[] = [
-  {
-    id: '1',
-    title: 'Primeiro Passo',
-    description: 'Completar primeira meditação',
-    icon: '⭐',
-    unlocked: true,
-  },
-  {
-    id: '2',
-    title: 'Uma Semana',
-    description: '7 dias consecutivos',
-    icon: '✨',
-    unlocked: true,
-  },
-  {
-    id: '3',
-    title: 'Dedicado',
-    description: '30 dias consecutivos',
-    icon: '🔥',
-    unlocked: false,
-  },
-  {
-    id: '4',
-    title: 'Mestre da Meditação',
-    description: '100 minutos totais',
-    icon: '💎',
-    unlocked: false,
-  },
-  {
-    id: '5',
-    title: 'Grato',
-    description: 'Registrar 10 itens de gratidão',
-    icon: '💫',
-    unlocked: true,
-  },
-  {
-    id: '6',
-    title: 'Equilibrado',
-    description: 'Manter humor em 80%+',
-    icon: '🌈',
-    unlocked: false,
-  },
-];
+import { ACHIEVEMENTS } from '@/constants/data';
+import { MoodEntry, Achievement } from '@/types';
+import { getMoodEmoji, getProgressPercentage } from '@/utils/helpers';
 
 export default function ProgressScreen() {
   const colorScheme = useColorScheme();
@@ -86,22 +31,6 @@ export default function ProgressScreen() {
   const averageMood = Math.round(moodEntries.reduce((sum, e) => sum + e.mood, 0) / moodEntries.length * 100) / 100;
   const unlockedAchievements = ACHIEVEMENTS.filter((a) => a.unlocked).length;
 
-  const getMoodEmoji = (mood: number) => {
-    switch (mood) {
-      case 1:
-        return '💔';
-      case 2:
-        return '😔';
-      case 3:
-        return '😌';
-      case 4:
-        return '😊';
-      case 5:
-        return '🌟';
-      default:
-        return '😐';
-    }
-  };
 
   return (
     <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>

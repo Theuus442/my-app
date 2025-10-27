@@ -7,12 +7,8 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { moderateScale, verticalScale, scaleFont, useDeviceSize, containerMaxWidth } from '@/utils/responsive';
-
-interface GratitudeEntry {
-  id: string;
-  text: string;
-  date: Date;
-}
+import { GratitudeEntry } from '@/types';
+import { formatDate } from '@/utils/helpers';
 
 export default function GratitudeScreen() {
   const colorScheme = useColorScheme();
@@ -193,13 +189,7 @@ export default function GratitudeScreen() {
                 <View style={styles.entryContent}>
                   <ThemedText style={[styles.entryText, { fontSize: scaleFont(14), lineHeight: scaleFont(20) }]}>{entry.text}</ThemedText>
                   <ThemedText style={[styles.entryDate, { fontSize: scaleFont(12) }]}>
-                    {entry.date.toLocaleDateString('pt-BR', {
-                      weekday: 'short',
-                      day: '2-digit',
-                      month: 'short',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
+                    {formatDate(entry.date)}
                   </ThemedText>
                 </View>
                 <Pressable

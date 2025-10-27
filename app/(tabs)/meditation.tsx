@@ -6,46 +6,9 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ResponsiveContainer } from '@/components/responsive-container';
-
-interface MeditationSession {
-  id: string;
-  duration: number;
-  title: string;
-  description: string;
-}
-
-interface SessionHistory {
-  sessionId: string;
-  date: Date;
-  completed: boolean;
-}
-
-const MEDITATION_SESSIONS: MeditationSession[] = [
-  {
-    id: '1',
-    duration: 5,
-    title: 'Respiração Consciente',
-    description: 'Técnica simples de respiração para acalmar',
-  },
-  {
-    id: '2',
-    duration: 10,
-    title: 'Meditação Guiada',
-    description: 'Experiência meditativa com orientação de voz',
-  },
-  {
-    id: '3',
-    duration: 15,
-    title: 'Mindfulness Completo',
-    description: 'Sessão completa de atenção plena',
-  },
-  {
-    id: '4',
-    duration: 20,
-    title: 'Meditação Profunda',
-    description: 'Sessão avançada de meditação',
-  },
-];
+import { MEDITATION_SESSIONS } from '@/constants/data';
+import { SessionHistory, MeditationSession } from '@/types';
+import { formatTime } from '@/utils/helpers';
 
 export default function MeditationScreen() {
   const colorScheme = useColorScheme();
@@ -107,11 +70,6 @@ export default function MeditationScreen() {
     setTotalTime(0);
   };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
 
   const getProgress = () => {
     if (totalTime === 0) return 0;
