@@ -44,6 +44,19 @@ export function AnimatedCompanion({
 
   return (
     <View style={[styles.container, containerStyle]}>
+      {/* Glow effect background */}
+      <View
+        style={[
+          styles.glowBackground,
+          {
+            width: size * 1.3,
+            height: size * 1.3,
+            borderRadius: size * 0.65,
+            backgroundColor: colors.secondary + '15',
+          },
+        ]}
+      />
+
       <Animated.View
         style={[
           styles.companion,
@@ -51,10 +64,22 @@ export function AnimatedCompanion({
             width: size,
             height: size,
             borderRadius: size / 2,
-            backgroundColor: colors.primary,
+            backgroundColor: colors.secondary,
           },
           animatedStyle,
         ]}>
+        {/* Shine effect */}
+        <View
+          style={[
+            styles.shine,
+            {
+              width: size * 0.4,
+              height: size * 0.4,
+              borderRadius: size * 0.2,
+            },
+          ]}
+        />
+
         {/* Head */}
         <View
           style={[
@@ -63,7 +88,7 @@ export function AnimatedCompanion({
               width: size * 0.5,
               height: size * 0.5,
               borderRadius: size * 0.25,
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.primary,
             },
           ]}>
           {/* Eyes */}
@@ -73,19 +98,29 @@ export function AnimatedCompanion({
                 styles.eye,
                 {
                   backgroundColor: '#FFFFFF',
-                  width: size * 0.08,
-                  height: size * 0.08,
-                  borderRadius: size * 0.04,
+                  width: size * 0.09,
+                  height: size * 0.09,
+                  borderRadius: size * 0.045,
                 },
               ]}>
               <View
                 style={[
                   styles.pupil,
                   {
-                    backgroundColor: '#333333',
-                    width: size * 0.04,
-                    height: size * 0.04,
-                    borderRadius: size * 0.02,
+                    backgroundColor: '#1B5E3F',
+                    width: size * 0.05,
+                    height: size * 0.05,
+                    borderRadius: size * 0.025,
+                  },
+                ]}
+              />
+              <View
+                style={[
+                  styles.eyeShine,
+                  {
+                    width: size * 0.025,
+                    height: size * 0.025,
+                    borderRadius: size * 0.0125,
                   },
                 ]}
               />
@@ -95,34 +130,67 @@ export function AnimatedCompanion({
                 styles.eye,
                 {
                   backgroundColor: '#FFFFFF',
-                  width: size * 0.08,
-                  height: size * 0.08,
-                  borderRadius: size * 0.04,
+                  width: size * 0.09,
+                  height: size * 0.09,
+                  borderRadius: size * 0.045,
                 },
               ]}>
               <View
                 style={[
                   styles.pupil,
                   {
-                    backgroundColor: '#333333',
-                    width: size * 0.04,
-                    height: size * 0.04,
-                    borderRadius: size * 0.02,
+                    backgroundColor: '#1B5E3F',
+                    width: size * 0.05,
+                    height: size * 0.05,
+                    borderRadius: size * 0.025,
+                  },
+                ]}
+              />
+              <View
+                style={[
+                  styles.eyeShine,
+                  {
+                    width: size * 0.025,
+                    height: size * 0.025,
+                    borderRadius: size * 0.0125,
                   },
                 ]}
               />
             </View>
           </View>
 
-          {/* Mouth - Smile */}
+          {/* Mouth - Happy smile */}
           <View
             style={[
               styles.mouth,
               {
-                borderBottomColor: '#333333',
-                borderBottomWidth: size * 0.02,
-                width: size * 0.15,
-                borderRadius: size * 0.15,
+                borderBottomColor: '#1B5E3F',
+                borderBottomWidth: size * 0.025,
+                width: size * 0.2,
+                borderRadius: size * 0.2,
+              },
+            ]}
+          />
+
+          {/* Blush */}
+          <View
+            style={[
+              styles.blush,
+              {
+                width: size * 0.08,
+                height: size * 0.08,
+                borderRadius: size * 0.04,
+              },
+            ]}
+          />
+          <View
+            style={[
+              styles.blush,
+              {
+                width: size * 0.08,
+                height: size * 0.08,
+                borderRadius: size * 0.04,
+                marginLeft: size * 0.25,
               },
             ]}
           />
@@ -133,11 +201,11 @@ export function AnimatedCompanion({
           style={[
             styles.body,
             {
-              width: size * 0.6,
-              height: size * 0.3,
-              backgroundColor: colors.secondary,
-              borderRadius: size * 0.1,
-              bottom: size * 0.05,
+              width: size * 0.7,
+              height: size * 0.35,
+              backgroundColor: colors.primary,
+              borderRadius: size * 0.12,
+              bottom: size * 0.02,
             },
           ]}
         />
