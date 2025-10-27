@@ -110,7 +110,7 @@ export default function ProgressScreen() {
         showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <ThemedText style={styles.title}>Progresso</ThemedText>
+          <ThemedText style={[styles.title, { color: colors.text }]}>Progresso</ThemedText>
         </View>
 
         {/* Main Stats Cards */}
