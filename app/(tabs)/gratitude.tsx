@@ -7,12 +7,8 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { moderateScale, verticalScale, scaleFont, useDeviceSize, containerMaxWidth } from '@/utils/responsive';
-
-interface GratitudeEntry {
-  id: string;
-  text: string;
-  date: Date;
-}
+import { GratitudeEntry } from '@/types';
+import { formatDate } from '@/utils/helpers';
 
 export default function GratitudeScreen() {
   const colorScheme = useColorScheme();
