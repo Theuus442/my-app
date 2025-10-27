@@ -52,32 +52,46 @@ export function QuickActionCard({
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 12,
+    borderRadius: 18,
     padding: 16,
     borderWidth: 1,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  header: {
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 3,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    marginBottom: 8,
+    gap: 14,
+  },
+  iconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F8FDFB',
   },
   emoji: {
-    fontSize: 24,
+    fontSize: 28,
+  },
+  content: {
+    flex: 1,
   },
   title: {
-    fontSize: 14,
-    fontWeight: '600',
-    flex: 1,
+    fontSize: 15,
+    fontWeight: '700',
+    marginBottom: 4,
   },
   description: {
     fontSize: 12,
     lineHeight: 16,
-    opacity: 0.7,
+  },
+  arrow: {
+    width: 32,
+    height: 32,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
