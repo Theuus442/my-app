@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ResponsiveContainer } from '@/components/responsive-container';
 
 const MOODS = [
   { emoji: '💔', label: 'Muito Ruim', value: 1 },
