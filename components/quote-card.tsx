@@ -25,8 +25,11 @@ export function QuoteCard({ quote, onRefresh, containerStyle }: QuoteCardProps) 
         },
         containerStyle,
       ]}>
+      <View style={[styles.iconBadge, { backgroundColor: colors.accent + '20' }]}>
+        <ThemedText style={styles.quoteIcon}>✨</ThemedText>
+      </View>
       <View style={styles.content}>
-        <ThemedText style={styles.quoteText}>{quote}</ThemedText>
+        <ThemedText style={[styles.quoteText, { color: colors.text }]}>{quote}</ThemedText>
       </View>
       <Pressable
         style={[
