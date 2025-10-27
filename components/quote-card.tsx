@@ -44,8 +44,8 @@ export function QuoteCard({ quote, onRefresh, containerStyle }: QuoteCardProps) 
         containerStyle,
       ]}>
       <View style={[styles.accentLine, { backgroundColor: colors.secondary }]} />
-      <View style={[styles.iconBadge, { backgroundColor: colors.accent + '15' }]}>
-        <ThemedText style={styles.quoteIcon}>✨</ThemedText>
+      <View style={[styles.iconBadge, { backgroundColor: colors.secondary + '15' }]}>
+        <ThemedText style={styles.quoteIcon}>💡</ThemedText>
       </View>
       <View style={styles.content}>
         <ThemedText style={[styles.label, { color: colors.textSecondary }]}>Inspiração</ThemedText>
