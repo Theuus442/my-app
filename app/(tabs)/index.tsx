@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
 import { AnimatedCompanion } from '@/components/animated-companion';
 import { WellnessBar } from '@/components/wellness-bar';
