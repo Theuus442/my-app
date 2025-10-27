@@ -17,7 +17,12 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <ThemedText style={styles.label}>Bem-estar</ThemedText>
+      <View style={styles.header}>
+        <ThemedText style={[styles.label, { color: colors.text }]}>Bem-estar</ThemedText>
+        <ThemedText style={[styles.percentage, { color: colors.primary }]}>
+          {clampedLevel}%
+        </ThemedText>
+      </View>
       <View
         style={[
           styles.barBackground,
@@ -35,7 +40,6 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
           ]}
         />
       </View>
-      <ThemedText style={styles.percentage}>{clampedLevel}%</ThemedText>
     </View>
   );
 }
