@@ -34,7 +34,20 @@ export default function MoodScreen() {
 
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
   const [selectedReasons, setSelectedReasons] = useState<string[]>([]);
-  const moodAnimations = MOODS.map(() => useSharedValue(1));
+  // Individual shared values for animations (avoid calling hooks inside callbacks)
+  const moodAnim0 = useSharedValue(1);
+  const moodAnim1 = useSharedValue(1);
+  const moodAnim2 = useSharedValue(1);
+  const moodAnim3 = useSharedValue(1);
+  const moodAnim4 = useSharedValue(1);
+  const moodAnimations = [moodAnim0, moodAnim1, moodAnim2, moodAnim3, moodAnim4];
+
+  const animStyle0 = useAnimatedStyle(() => ({ transform: [{ scale: moodAnim0.value }] }));
+  const animStyle1 = useAnimatedStyle(() => ({ transform: [{ scale: moodAnim1.value }] }));
+  const animStyle2 = useAnimatedStyle(() => ({ transform: [{ scale: moodAnim2.value }] }));
+  const animStyle3 = useAnimatedStyle(() => ({ transform: [{ scale: moodAnim3.value }] }));
+  const animStyle4 = useAnimatedStyle(() => ({ transform: [{ scale: moodAnim4.value }] }));
+  const animStyles = [animStyle0, animStyle1, animStyle2, animStyle3, animStyle4];
 
   const toggleReason = (reason: string) => {
     setSelectedReasons((prev) => {
@@ -93,12 +106,8 @@ export default function MoodScreen() {
           </ThemedText>
           <View style={styles.moods}>
             {MOODS.map((mood, index) => {
-              const animStyle = useAnimatedStyle(() => ({
-                transform: [{ scale: moodAnimations[index].value }],
-              }));
-
               return (
-                <Animated.View key={mood.value} style={animStyle}>
+                <Animated.View key={mood.value} style={animStyles[index]}>
                   <Pressable
                     style={[
                       styles.moodButton,
