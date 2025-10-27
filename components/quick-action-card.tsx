@@ -10,6 +10,7 @@ interface QuickActionCardProps {
   emoji: string;
   title: string;
   description: string;
+  accentColor?: string;
   onPress: () => void;
   containerStyle?: ViewStyle;
 }
@@ -18,6 +19,7 @@ export function QuickActionCard({
   emoji,
   title,
   description,
+  accentColor = '#6BCB77',
   onPress,
   containerStyle,
 }: QuickActionCardProps) {
