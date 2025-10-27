@@ -356,25 +356,28 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
 
       {/* Floating sparkle particles */}
       {[0, 1, 2, 3].map((index) => {
-        const delay = index * 500;
-        const particleAnim = useSharedValue(0);
+        const particleAnims = [useSharedValue(0), useSharedValue(0), useSharedValue(0), useSharedValue(0)];
 
-        useEffect(() => {
-          particleAnim.value = withRepeat(
-            withTiming(1, {
-              duration: 3000,
-              easing: Easing.inOut(Easing.ease),
-            }),
-            -1,
-            true
-          );
-        }, []);
+        if (index === 0) {
+          useEffect(() => {
+            particleAnims.forEach((anim) => {
+              anim.value = withRepeat(
+                withTiming(1, {
+                  duration: 3000,
+                  easing: Easing.inOut(Easing.ease),
+                }),
+                -1,
+                true
+              );
+            });
+          }, []);
+        }
 
         const particleStyle = useAnimatedStyle(() => ({
           transform: [
             {
               translateY: interpolate(
-                particleAnim.value,
+                particleAnims[index].value,
                 [0, 0.5, 1],
                 [-size * 0.3, -size * 0.6, -size * 0.3],
                 Extrapolate.CLAMP
@@ -382,14 +385,14 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
             },
             {
               translateX: interpolate(
-                particleAnim.value,
+                particleAnims[index].value,
                 [0, 1],
                 [Math.cos((index * Math.PI) / 2) * size * 0.4, Math.cos((index * Math.PI) / 2) * size * 0.5],
                 Extrapolate.CLAMP
               ),
             },
           ],
-          opacity: interpolate(particleAnim.value, [0, 0.5, 1], [0, 0.8, 0], Extrapolate.CLAMP),
+          opacity: interpolate(particleAnims[index].value, [0, 0.5, 1], [0, 0.8, 0], Extrapolate.CLAMP),
         }));
 
         return (
