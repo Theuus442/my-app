@@ -122,11 +122,16 @@ export default function ProgressScreen() {
               {
                 backgroundColor: colors.card,
                 borderColor: colors.border,
+                shadowColor: '#FF6B35',
               },
             ]}>
-            <ThemedText style={styles.statEmoji}>🔥</ThemedText>
-            <ThemedText style={styles.statValue}>{streak}</ThemedText>
-            <ThemedText style={styles.statLabel}>Dias consecutivos</ThemedText>
+            <View style={[styles.statBadge, { backgroundColor: '#FF6B35' + '20' }]}>
+              <ThemedText style={styles.statEmoji}>🔥</ThemedText>
+            </View>
+            <ThemedText style={[styles.statValue, { color: '#FF6B35' }]}>{streak}</ThemedText>
+            <ThemedText style={[styles.statLabel, { color: colors.textSecondary }]}>
+              Dias consecutivos
+            </ThemedText>
           </View>
 
           {/* Meditation Minutes Card */}
@@ -136,11 +141,18 @@ export default function ProgressScreen() {
               {
                 backgroundColor: colors.card,
                 borderColor: colors.border,
+                shadowColor: colors.primary,
               },
             ]}>
-            <ThemedText style={styles.statEmoji}>🧘</ThemedText>
-            <ThemedText style={styles.statValue}>{totalMeditationMinutes}</ThemedText>
-            <ThemedText style={styles.statLabel}>Minutos totais</ThemedText>
+            <View style={[styles.statBadge, { backgroundColor: colors.primary + '20' }]}>
+              <ThemedText style={styles.statEmoji}>🧘</ThemedText>
+            </View>
+            <ThemedText style={[styles.statValue, { color: colors.primary }]}>
+              {totalMeditationMinutes}
+            </ThemedText>
+            <ThemedText style={[styles.statLabel, { color: colors.textSecondary }]}>
+              Minutos totais
+            </ThemedText>
           </View>
 
           {/* Gratitude Card */}
@@ -150,11 +162,18 @@ export default function ProgressScreen() {
               {
                 backgroundColor: colors.card,
                 borderColor: colors.border,
+                shadowColor: colors.accentPeach,
               },
             ]}>
-            <ThemedText style={styles.statEmoji}>💚</ThemedText>
-            <ThemedText style={styles.statValue}>{gratitudeEntries}</ThemedText>
-            <ThemedText style={styles.statLabel}>Itens de gratidão</ThemedText>
+            <View style={[styles.statBadge, { backgroundColor: colors.accentPeach + '20' }]}>
+              <ThemedText style={styles.statEmoji}>💚</ThemedText>
+            </View>
+            <ThemedText style={[styles.statValue, { color: colors.accentPeach }]}>
+              {gratitudeEntries}
+            </ThemedText>
+            <ThemedText style={[styles.statLabel, { color: colors.textSecondary }]}>
+              Itens de gratidão
+            </ThemedText>
           </View>
 
           {/* Average Mood Card */}
@@ -164,11 +183,18 @@ export default function ProgressScreen() {
               {
                 backgroundColor: colors.card,
                 borderColor: colors.border,
+                shadowColor: colors.accentYellow,
               },
             ]}>
-            <ThemedText style={styles.statEmoji}>😊</ThemedText>
-            <ThemedText style={styles.statValue}>{(averageMood * 20).toFixed(0)}%</ThemedText>
-            <ThemedText style={styles.statLabel}>Humor médio</ThemedText>
+            <View style={[styles.statBadge, { backgroundColor: colors.accentYellow + '20' }]}>
+              <ThemedText style={styles.statEmoji}>😊</ThemedText>
+            </View>
+            <ThemedText style={[styles.statValue, { color: colors.accentYellow }]}>
+              {(averageMood * 20).toFixed(0)}%
+            </ThemedText>
+            <ThemedText style={[styles.statLabel, { color: colors.textSecondary }]}>
+              Humor médio
+            </ThemedText>
           </View>
         </View>
 
