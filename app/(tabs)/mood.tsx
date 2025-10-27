@@ -80,10 +80,10 @@ export default function MoodScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Pressable onPress={() => router.push('/(tabs)/')}>
-            <IconSymbol size={24} name="chevron.left" color={colors.primary} />
+            <IconSymbol size={28} name="chevron.left" color={colors.secondary} />
           </Pressable>
-          <ThemedText style={styles.title}>Como me sinto?</ThemedText>
-          <View style={{ width: 24 }} />
+          <ThemedText style={[styles.title, { color: colors.text }]}>Como me sinto?</ThemedText>
+          <View style={{ width: 28 }} />
         </View>
 
         {/* Mood Selection */}
