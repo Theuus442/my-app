@@ -15,11 +15,17 @@ interface WellnessBarProps {
   testID?: string;
 }
 
-export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
+export function WellnessBar({
+  level,
+  containerStyle,
+  label = 'Nível de Bem-estar',
+  sublabel = 'Sua jornada de bem-estar',
+  testID,
+}: WellnessBarProps) {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
-  const clampedLevel = Math.max(0, Math.min(100, level));
+  const clampedLevel = useMemo(() => clampNumber(level, 0, 100), [level]);
   const barWidth = useSharedValue(0);
 
   useEffect(() => {
