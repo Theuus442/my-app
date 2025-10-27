@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ResponsiveContainer } from '@/components/responsive-container';
 
 interface MeditationSession {
   id: string;
@@ -186,6 +187,7 @@ export default function MeditationScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header */}
         <View style={styles.header}>
           <ThemedText style={[styles.title, { color: colors.text }]}>Meditação</ThemedText>
@@ -281,6 +283,7 @@ export default function MeditationScreen() {
           </View>
         )}
 
+        </ResponsiveContainer>
         <View style={{ height: 20 }} />
       </ScrollView>
     </SafeAreaView>

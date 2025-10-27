@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ResponsiveContainer } from '@/components/responsive-container';
 
 interface Achievement {
   id: string;
@@ -108,6 +109,7 @@ export default function ProgressScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header */}
         <View style={styles.header}>
           <ThemedText style={[styles.title, { color: colors.text }]}>Progresso</ThemedText>
@@ -332,6 +334,7 @@ export default function ProgressScreen() {
           </View>
         </View>
 
+        </ResponsiveContainer>
         <View style={{ height: 20 }} />
       </ScrollView>
     </SafeAreaView>

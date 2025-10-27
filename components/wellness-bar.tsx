@@ -4,6 +4,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from '
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { scaleFont, moderateScale } from '@/utils/responsive';
 
 interface WellnessBarProps {
   level: number; // 0-100
@@ -29,20 +30,14 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
   }));
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle]} accessible accessibilityRole="region" accessibilityLabel={`Nível de bem-estar ${clampedLevel} por cento`}>
       <View style={styles.header}>
         <View>
-          <ThemedText style={[styles.label, { color: colors.textSecondary }]}>
-            Nível de Bem-estar
-          </ThemedText>
-          <ThemedText style={[styles.subtitle, { color: colors.textSecondary }]}>
-            Sua jornada de bem-estar
-          </ThemedText>
+          <ThemedText style={[styles.label, { color: colors.textSecondary, fontSize: scaleFont(14) }]}>Nível de Bem-estar</ThemedText>
+          <ThemedText style={[styles.subtitle, { color: colors.textSecondary, fontSize: scaleFont(12) }]}>Sua jornada de bem-estar</ThemedText>
         </View>
         <View style={[styles.percentageBadge, { backgroundColor: colors.secondary + '15' }]}>
-          <ThemedText style={[styles.percentage, { color: colors.secondary }]}>
-            {clampedLevel}%
-          </ThemedText>
+          <ThemedText style={[styles.percentage, { color: colors.secondary, fontSize: scaleFont(16) }]}>{clampedLevel}%</ThemedText>
         </View>
       </View>
       <View
@@ -50,6 +45,8 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
           styles.barBackground,
           {
             backgroundColor: colors.border,
+            height: moderateScale(12),
+            borderRadius: moderateScale(6),
           },
         ]}>
         <Animated.View
@@ -61,7 +58,7 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
             animatedBarStyle,
           ]}
         />
-        <View style={[styles.barGlow, { backgroundColor: colors.secondary }]} />
+        <View style={[styles.barGlow, { backgroundColor: colors.secondary, width: moderateScale(40) }]} />
       </View>
     </View>
   );

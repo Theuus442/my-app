@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ResponsiveContainer } from '@/components/responsive-container';
 
 interface Article {
   id: string;
@@ -146,6 +147,7 @@ export default function LibraryScreen() {
             </Pressable>
           </View>
 
+          <ResponsiveContainer>
           <View style={styles.articleContent}>
             <ThemedText style={styles.articleCategory}>{selectedArticle.category}</ThemedText>
             <ThemedText style={styles.articleTitle}>{selectedArticle.title}</ThemedText>
@@ -163,6 +165,7 @@ export default function LibraryScreen() {
               {selectedArticle.content} {selectedArticle.content}
             </ThemedText>
           </View>
+          </ResponsiveContainer>
 
           <View style={{ height: 20 }} />
         </ScrollView>
@@ -176,6 +179,7 @@ export default function LibraryScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header */}
         <View style={styles.header}>
           <ThemedText style={[styles.title, { color: colors.text }]}>Biblioteca</ThemedText>
@@ -286,6 +290,7 @@ export default function LibraryScreen() {
             </Pressable>
           ))}
         </View>
+        </ResponsiveContainer>
 
         <View style={{ height: 20 }} />
       </ScrollView>

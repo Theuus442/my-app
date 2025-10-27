@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, ScrollView, Pressable, ImageBackground } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
@@ -11,6 +11,9 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
+import { scaleFont, moderateScale, useDeviceSize } from '@/utils/responsive';
+import { ResponsiveContainer } from '@/components/responsive-container';
+import { useDeviceSize } from '@/utils/responsive';
 
 const MOTIVATIONAL_QUOTES = [
   'Você é mais forte do que imagina! 💪',
@@ -27,9 +30,15 @@ export default function HomeScreen() {
   const colors = Colors[colorScheme ?? 'light'];
   const router = useRouter();
 
+  // lightweight device sizing hook
+  const { isTablet, isSmall } = useDeviceSize();
+
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const settingsBtnScale = useSharedValue(1);
+
+  const greetingSize = scaleFont(isSmall ? 26 : isTablet ? 34 : 30);
+  const dateSize = scaleFont(isSmall ? 12 : isTablet ? 14 : 13);
 
   const handleRefreshQuote = useCallback(() => {
     setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
@@ -76,14 +85,15 @@ export default function HomeScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header with Gradient Background */}
         <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
-              <ThemedText style={[styles.greeting, { color: colors.text }]}>
+              <ThemedText style={[styles.greeting, { color: colors.text, fontSize: greetingSize, lineHeight: Math.round(greetingSize * 1.05) }]}>
               Olá, User! 🌟
             </ThemedText>
-              <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
+              <ThemedText style={[styles.dateTime, { color: colors.textSecondary, fontSize: dateSize, lineHeight: Math.round(dateSize * 1.2) }]}>
                 {getCurrentTime()}
               </ThemedText>
             </View>
@@ -110,52 +120,57 @@ export default function HomeScreen() {
             {
               backgroundColor: colors.card,
               borderColor: colors.border,
+              paddingVertical: moderateScale(isTablet ? 36 : 22),
+              marginHorizontal: moderateScale(isTablet ? 28 : 20),
+              borderRadius: moderateScale(isTablet ? 32 : 24),
+              maxWidth: isTablet ? 820 : '100%',
+              width: '100%',
             },
           ]}>
           <View style={styles.companionBackground} />
-          <AnimatedCompanion size={160} wellnessLevel={wellnessLevel} />
+          <AnimatedCompanion size={isTablet ? 180 : 140} wellnessLevel={wellnessLevel} />
         </View>
 
         {/* Wellness Bar */}
-        <WellnessBar level={wellnessLevel} />
+        <WellnessBar level={wellnessLevel} containerStyle={{ maxWidth: isTablet ? 760 : '100%', marginHorizontal: isTablet ? 28 : 20 }} />
 
         {/* Quote Card */}
         <QuoteCard
           quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
           onRefresh={handleRefreshQuote}
+          containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
         />
 
         {/* Quick Actions Section */}
-        <View style={styles.quickActionsSection}>
-          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
-            Ações Rápidas
-          </ThemedText>
-          <View style={styles.quickActionsGrid}>
+        <View style={[styles.quickActionsSection, { paddingHorizontal: isTablet ? 28 : 20 }]}>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>Ações Rápidas</ThemedText>
+          <View style={[styles.quickActionsGrid, { flexDirection: isTablet ? 'row' : 'column', gap: 12 }]}>
             <QuickActionCard
               emoji="🧠"
               title="Meditação"
               description="5 minutos"
               onPress={handleMeditationPress}
-              containerStyle={styles.actionCard}
+              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
             <QuickActionCard
               emoji="💫"
               title="Gratidão"
               description="Registre bênçãos"
               onPress={handleGratitudePress}
-              containerStyle={styles.actionCard}
+              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
             <QuickActionCard
               emoji="✨"
               title="Humor"
               description="Como se sente?"
               onPress={handleMoodPress}
-              containerStyle={styles.actionCard}
+              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
           </View>
         </View>
 
         {/* Spacing */}
+        </ResponsiveContainer>
         <View style={{ height: 24 }} />
       </ScrollView>
     </SafeAreaView>
