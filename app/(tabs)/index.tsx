@@ -113,47 +113,49 @@ export default function HomeScreen() {
             {
               backgroundColor: colors.card,
               borderColor: colors.border,
+              paddingVertical: isTablet ? 48 : 28,
+              marginHorizontal: isTablet ? 28 : 20,
+              borderRadius: isTablet ? 36 : 28,
             },
           ]}>
           <View style={styles.companionBackground} />
-          <AnimatedCompanion size={160} wellnessLevel={wellnessLevel} />
+          <AnimatedCompanion size={isTablet ? 220 : 160} wellnessLevel={wellnessLevel} />
         </View>
 
         {/* Wellness Bar */}
-        <WellnessBar level={wellnessLevel} />
+        <WellnessBar level={wellnessLevel} containerStyle={{ maxWidth: isTablet ? 760 : '100%', marginHorizontal: isTablet ? 28 : 20 }} />
 
         {/* Quote Card */}
         <QuoteCard
           quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
           onRefresh={handleRefreshQuote}
+          containerStyle={{ maxWidth: isTablet ? 760 : '100%' }}
         />
 
         {/* Quick Actions Section */}
-        <View style={styles.quickActionsSection}>
-          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
-            Ações Rápidas
-          </ThemedText>
-          <View style={styles.quickActionsGrid}>
+        <View style={[styles.quickActionsSection, { paddingHorizontal: isTablet ? 28 : 20 }]}>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>Ações Rápidas</ThemedText>
+          <View style={[styles.quickActionsGrid, { flexDirection: isTablet ? 'row' : 'column', gap: 12 }]}>
             <QuickActionCard
               emoji="🧠"
               title="Meditação"
               description="5 minutos"
               onPress={handleMeditationPress}
-              containerStyle={styles.actionCard}
+              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
             <QuickActionCard
               emoji="💫"
               title="Gratidão"
               description="Registre bênçãos"
               onPress={handleGratitudePress}
-              containerStyle={styles.actionCard}
+              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
             <QuickActionCard
               emoji="✨"
               title="Humor"
               description="Como se sente?"
               onPress={handleMoodPress}
-              containerStyle={styles.actionCard}
+              containerStyle={[styles.actionCard, { flex: isTablet ? 1 : undefined }]}
             />
           </View>
         </View>
