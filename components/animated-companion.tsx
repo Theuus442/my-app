@@ -124,9 +124,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
         style={[
           styles.glowLayer1,
           {
-            width: size * 1.8,
-            height: size * 1.8,
-            borderRadius: size * 0.9,
+            width: scaledSize * 1.8,
+            height: scaledSize * 1.8,
+            borderRadius: scaledSize * 0.9,
             borderColor: colors.secondary,
           },
           glowAnimStyle,
@@ -136,9 +136,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
         style={[
           styles.glowLayer2,
           {
-            width: size * 1.5,
-            height: size * 1.5,
-            borderRadius: size * 0.75,
+            width: scaledSize * 1.5,
+            height: scaledSize * 1.5,
+            borderRadius: scaledSize * 0.75,
             borderColor: colors.primary,
           },
           glowAnimStyle,
@@ -148,9 +148,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
         style={[
           styles.glowLayer3,
           {
-            width: size * 1.25,
-            height: size * 1.25,
-            borderRadius: size * 0.625,
+            width: scaledSize * 1.25,
+            height: scaledSize * 1.25,
+            borderRadius: scaledSize * 0.625,
             borderColor: colors.accent,
           },
           glowAnimStyle,
@@ -174,10 +174,10 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               style={[
                 styles.bodyBase,
                 {
-                  width: size * 0.9,
-                  height: size * 0.6,
-                  borderRadius: size * 0.25,
-                  bottom: size * 0.05,
+                  width: scaledSize * 0.9,
+                  height: scaledSize * 0.6,
+                  borderRadius: scaledSize * 0.25,
+                  bottom: scaledSize * 0.05,
                   backgroundColor: colors.primary,
                 },
               ]}>
@@ -185,8 +185,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 style={[
                   styles.bodyShine,
                   {
-                    width: size * 0.3,
-                    height: size * 0.25,
+                    width: scaledSize * 0.3,
+                    height: scaledSize * 0.25,
                   },
                   scaleAnimStyle,
                 ]}
@@ -198,9 +198,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               style={[
                 styles.head,
                 {
-                  width: size * 0.55,
-                  height: size * 0.6,
-                  borderRadius: size * 0.3,
+                  width: scaledSize * 0.55,
+                  height: scaledSize * 0.6,
+                  borderRadius: scaledSize * 0.3,
                   backgroundColor: colors.secondary,
                 },
               ]}>
@@ -209,9 +209,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 style={[
                   styles.headShine,
                   {
-                    width: size * 0.2,
-                    height: size * 0.2,
-                    borderRadius: size * 0.1,
+                    width: scaledSize * 0.2,
+                    height: scaledSize * 0.2,
+                    borderRadius: scaledSize * 0.1,
                   },
                 ]}
               />
@@ -223,8 +223,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   style={[
                     styles.eyeWrapper,
                     {
-                      width: size * 0.12,
-                      height: size * 0.14,
+                      width: scaledSize * 0.12,
+                      height: scaledSize * 0.14,
                     },
                   ]}>
                   <View style={[styles.eye, { backgroundColor: '#FFFFFF' }]}>
@@ -232,8 +232,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                       style={[
                         styles.pupil,
                         {
-                          width: size * 0.055,
-                          height: size * 0.07,
+                          width: scaledSize * 0.055,
+                          height: scaledSize * 0.07,
                           backgroundColor: colors.secondary,
                         },
                       ]}>
@@ -241,8 +241,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                         style={[
                           styles.eyeLight,
                           {
-                            width: size * 0.02,
-                            height: size * 0.025,
+                            width: scaledSize * 0.02,
+                            height: scaledSize * 0.025,
                           },
                         ]}
                       />
@@ -255,8 +255,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   style={[
                     styles.eyeWrapper,
                     {
-                      width: size * 0.12,
-                      height: size * 0.14,
+                      width: scaledSize * 0.12,
+                      height: scaledSize * 0.14,
                     },
                   ]}>
                   <View style={[styles.eye, { backgroundColor: '#FFFFFF' }]}>
@@ -264,8 +264,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                       style={[
                         styles.pupil,
                         {
-                          width: size * 0.055,
-                          height: size * 0.07,
+                          width: scaledSize * 0.055,
+                          height: scaledSize * 0.07,
                           backgroundColor: colors.secondary,
                         },
                       ]}>
@@ -273,8 +273,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                         style={[
                           styles.eyeLight,
                           {
-                            width: size * 0.02,
-                            height: size * 0.025,
+                            width: scaledSize * 0.02,
+                            height: scaledSize * 0.025,
                           },
                         ]}
                       />
@@ -288,9 +288,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 style={[
                   styles.nose,
                   {
-                    width: size * 0.05,
-                    height: size * 0.08,
-                    borderRadius: size * 0.025,
+                    width: scaledSize * 0.05,
+                    height: scaledSize * 0.08,
+                    borderRadius: scaledSize * 0.025,
                   },
                 ]}
               />
@@ -300,15 +300,15 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 style={[
                   styles.mouthContainer,
                   {
-                    width: size * 0.22,
+                    width: scaledSize * 0.22,
                   },
                 ]}>
                 <View
                   style={[
                     styles.mouth,
                     {
-                      borderRadius: size * 0.08,
-                      borderBottomWidth: size * 0.025,
+                      borderRadius: scaledSize * 0.08,
+                      borderBottomWidth: scaledSize * 0.025,
                     },
                   ]}
                 />
@@ -320,10 +320,10 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               style={[
                 styles.cheek,
                 {
-                  width: size * 0.1,
-                  height: size * 0.08,
-                  borderRadius: size * 0.05,
-                  left: size * 0.08,
+                  width: scaledSize * 0.1,
+                  height: scaledSize * 0.08,
+                  borderRadius: scaledSize * 0.05,
+                  left: scaledSize * 0.08,
                 },
               ]}
             />
@@ -331,10 +331,10 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               style={[
                 styles.cheek,
                 {
-                  width: size * 0.1,
-                  height: size * 0.08,
-                  borderRadius: size * 0.05,
-                  right: size * 0.08,
+                  width: scaledSize * 0.1,
+                  height: scaledSize * 0.08,
+                  borderRadius: scaledSize * 0.05,
+                  right: scaledSize * 0.08,
                 },
               ]}
             />
@@ -344,9 +344,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
               style={[
                 styles.wellnessRing,
                 {
-                  width: size * 1.15,
-                  height: size * 1.15,
-                  borderRadius: size * 0.575,
+                  width: scaledSize * 1.15,
+                  height: scaledSize * 1.15,
+                  borderRadius: scaledSize * 0.575,
                   borderColor: colors.secondary,
                   borderWidth: 2,
                   opacity: wellnessLevel / 100 * 0.5,
@@ -367,9 +367,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
             style={[
               styles.sparkle,
               {
-                width: size * 0.05,
-                height: size * 0.05,
-                borderRadius: size * 0.025,
+                width: scaledSize * 0.05,
+                height: scaledSize * 0.05,
+                borderRadius: scaledSize * 0.025,
                 left: `${sparkleOffset}%`,
                 bottom: -20,
                 opacity: 0.6,
