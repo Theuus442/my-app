@@ -46,26 +46,40 @@ export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 8,
+    gap: 10,
     paddingHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 16,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   label: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 15,
+    fontWeight: '700',
   },
   barBackground: {
-    height: 12,
-    borderRadius: 6,
+    height: 14,
+    borderRadius: 7,
     overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   barFill: {
     height: '100%',
-    borderRadius: 6,
+    borderRadius: 7,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 1,
   },
   percentage: {
-    fontSize: 12,
-    textAlign: 'right',
-    fontWeight: '500',
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
