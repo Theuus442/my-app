@@ -34,6 +34,7 @@ export default function MoodScreen() {
 
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
   const [selectedReasons, setSelectedReasons] = useState<string[]>([]);
+  const moodAnimations = MOODS.map(() => useSharedValue(1));
 
   const toggleReason = (reason: string) => {
     setSelectedReasons((prev) => {
@@ -42,6 +43,13 @@ export default function MoodScreen() {
       } else {
         return [...prev, reason];
       }
+    });
+  };
+
+  const handleMoodSelect = (moodValue: number, index: number) => {
+    setSelectedMood(moodValue);
+    moodAnimations[index].value = withSpring(1.15, { damping: 6, mass: 0.8 }, () => {
+      moodAnimations[index].value = withSpring(1);
     });
   };
 
