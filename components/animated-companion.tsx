@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -53,19 +53,19 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
 
   const floatAnimStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateY: interpolate(floatAnim.value, [0, 0.5, 1], [0, -20, 0], Extrapolate.CLAMP) },
+      { translateY: interpolate(floatAnim.value, [0, 0.5, 1], [0, -16, 0], Extrapolate.CLAMP) },
     ],
   }));
 
   const scaleAnimStyle = useAnimatedStyle(() => ({
     transform: [
-      { scale: interpolate(pulseAnim.value, [0, 0.5, 1], [1, 1.1, 1], Extrapolate.CLAMP) },
+      { scale: interpolate(pulseAnim.value, [0, 0.5, 1], [1, 1.08, 1], Extrapolate.CLAMP) },
     ],
   }));
 
   const bobbleStyle = useAnimatedStyle(() => ({
     transform: [
-      { rotate: `${interpolate(bobbleAnim.value, [0, 0.5, 1], [0, 3, 0], Extrapolate.CLAMP)}deg` },
+      { rotate: `${interpolate(bobbleAnim.value, [0, 0.5, 1], [0, 2.5, 0], Extrapolate.CLAMP)}deg` },
     ],
   }));
 
@@ -77,9 +77,9 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
         style={[
           styles.aura,
           {
-            width: scaledSize * 1.4,
-            height: scaledSize * 1.4,
-            borderRadius: scaledSize * 0.7,
+            width: scaledSize * 1.5,
+            height: scaledSize * 1.5,
+            borderRadius: scaledSize * 0.75,
             backgroundColor: wellnessColor,
           },
           scaleAnimStyle,
@@ -104,7 +104,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 {
                   width: scaledSize * 0.25,
                   height: scaledSize * 0.25,
-                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.45)',
                 },
               ]}
             />
@@ -129,7 +129,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   height: scaledSize * 0.22,
                   top: scaledSize * 0.08,
                   left: scaledSize * 0.1,
-                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.55)',
                 },
               ]}
             />
@@ -158,8 +158,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                     style={[
                       styles.eyeLight,
                       {
-                        width: scaledSize * 0.02,
-                        height: scaledSize * 0.02,
+                        width: scaledSize * 0.023,
+                        height: scaledSize * 0.023,
                         backgroundColor: '#FFFFFF',
                       },
                     ]}
@@ -190,8 +190,8 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                     style={[
                       styles.eyeLight,
                       {
-                        width: scaledSize * 0.02,
-                        height: scaledSize * 0.02,
+                        width: scaledSize * 0.023,
+                        height: scaledSize * 0.023,
                         backgroundColor: '#FFFFFF',
                       },
                     ]}
@@ -211,7 +211,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   borderTopRightRadius: scaledSize * 0.1,
                   borderBottomLeftRadius: scaledSize * 0.02,
                   borderBottomRightRadius: scaledSize * 0.02,
-                  backgroundColor: 'rgba(0, 0, 0, 0.15)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.2)',
                 },
               ]}
             />
@@ -226,7 +226,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 left: scaledSize * -0.15,
                 top: scaledSize * 0.1,
                 backgroundColor: wellnessColor,
-                opacity: 0.6,
+                opacity: 0.7,
               },
             ]}
           />
@@ -239,7 +239,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                 right: scaledSize * -0.12,
                 top: scaledSize * 0.3,
                 backgroundColor: wellnessColor,
-                opacity: 0.5,
+                opacity: 0.6,
               },
             ]}
           />
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   },
   aura: {
     position: 'absolute',
-    opacity: 0.15,
+    opacity: 0.18,
   },
   characterContainer: {
     alignItems: 'center',
@@ -268,9 +268,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
     elevation: 4,
   },
   head: {
@@ -278,14 +278,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.22,
     shadowRadius: 12,
     elevation: 5,
   },
   shine: {
     position: 'absolute',
     borderRadius: 100,
-    opacity: 0.4,
+    opacity: 0.45,
   },
   eyesContainer: {
     flexDirection: 'row',
