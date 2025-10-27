@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
@@ -13,16 +13,8 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
 import { scaleFont, moderateScale, useDeviceSize } from '@/utils/responsive';
 import { ResponsiveContainer } from '@/components/responsive-container';
-
-const MOTIVATIONAL_QUOTES = [
-  'Você é mais forte do que imagina! 💪',
-  'Respire fundo. Você está no controle. 🌬️',
-  'Cada pequeno passo importa. Continue! 🚶',
-  'Hoje é um novo começo. Aproveite! ☀️',
-  'Você merece cuidar de si mesmo. ���',
-  'Está tudo bem não estar bem o tempo todo. 🤗',
-  'Seu progresso é válido, por menor que seja. 📈',
-];
+import { MOTIVATIONAL_QUOTES } from '@/constants/data';
+import { getCurrentTime } from '@/utils/helpers';
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme();
