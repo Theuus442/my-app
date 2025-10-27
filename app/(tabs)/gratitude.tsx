@@ -189,13 +189,7 @@ export default function GratitudeScreen() {
                 <View style={styles.entryContent}>
                   <ThemedText style={[styles.entryText, { fontSize: scaleFont(14), lineHeight: scaleFont(20) }]}>{entry.text}</ThemedText>
                   <ThemedText style={[styles.entryDate, { fontSize: scaleFont(12) }]}>
-                    {entry.date.toLocaleDateString('pt-BR', {
-                      weekday: 'short',
-                      day: '2-digit',
-                      month: 'short',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
+                    {formatDate(entry.date)}
                   </ThemedText>
                 </View>
                 <Pressable
