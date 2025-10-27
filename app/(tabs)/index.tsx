@@ -20,7 +20,7 @@ const MOTIVATIONAL_QUOTES = [
   'Respire fundo. Você está no controle. 🌬️',
   'Cada pequeno passo importa. Continue! 🚶',
   'Hoje é um novo começo. Aproveite! ☀️',
-  'Você merece cuidar de si mesmo. ��',
+  'Você merece cuidar de si mesmo. 💚',
   'Está tudo bem não estar bem o tempo todo. 🤗',
   'Seu progresso é válido, por menor que seja. 📈',
 ];
@@ -120,13 +120,15 @@ export default function HomeScreen() {
             {
               backgroundColor: colors.card,
               borderColor: colors.border,
-              paddingVertical: isTablet ? 48 : 28,
-              marginHorizontal: isTablet ? 28 : 20,
-              borderRadius: isTablet ? 36 : 28,
+              paddingVertical: moderateScale(isTablet ? 36 : 22),
+              marginHorizontal: moderateScale(isTablet ? 28 : 20),
+              borderRadius: moderateScale(isTablet ? 32 : 24),
+              maxWidth: isTablet ? 820 : '100%',
+              width: '100%',
             },
           ]}>
           <View style={styles.companionBackground} />
-          <AnimatedCompanion size={isTablet ? 220 : 160} wellnessLevel={wellnessLevel} />
+          <AnimatedCompanion size={isTablet ? 180 : 140} wellnessLevel={wellnessLevel} />
         </View>
 
         {/* Wellness Bar */}
