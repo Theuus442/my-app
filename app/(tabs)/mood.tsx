@@ -88,32 +88,49 @@ export default function MoodScreen() {
 
         {/* Mood Selection */}
         <View style={styles.section}>
-          <ThemedText style={styles.sectionTitle}>Selecione seu humor atual</ThemedText>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
+            Como você está se sentindo?
+          </ThemedText>
           <View style={styles.moods}>
-            {MOODS.map((mood) => (
-              <Pressable
-                key={mood.value}
-                style={[
-                  styles.moodButton,
-                  {
-                    backgroundColor:
-                      selectedMood === mood.value ? colors.primary : colors.card,
-                    borderColor: colors.border,
-                  },
-                ]}
-                onPress={() => setSelectedMood(mood.value)}>
-                <ThemedText style={styles.moodEmoji}>{mood.emoji}</ThemedText>
-                <ThemedText
-                  style={[
-                    styles.moodLabel,
-                    {
-                      color: selectedMood === mood.value ? '#FFFFFF' : colors.text,
-                    },
-                  ]}>
-                  {mood.label}
-                </ThemedText>
-              </Pressable>
-            ))}
+            {MOODS.map((mood, index) => {
+              const animStyle = useAnimatedStyle(() => ({
+                transform: [{ scale: moodAnimations[index].value }],
+              }));
+
+              return (
+                <Animated.View key={mood.value} style={animStyle}>
+                  <Pressable
+                    style={[
+                      styles.moodButton,
+                      {
+                        backgroundColor:
+                          selectedMood === mood.value
+                            ? colors.secondary
+                            : colors.card,
+                        borderColor:
+                          selectedMood === mood.value
+                            ? colors.secondary
+                            : colors.border,
+                      },
+                    ]}
+                    onPress={() => handleMoodSelect(mood.value, index)}>
+                    <ThemedText style={styles.moodEmoji}>{mood.emoji}</ThemedText>
+                    <ThemedText
+                      style={[
+                        styles.moodLabel,
+                        {
+                          color:
+                            selectedMood === mood.value
+                              ? '#FFFFFF'
+                              : colors.textSecondary,
+                        },
+                      ]}>
+                      {mood.label}
+                    </ThemedText>
+                  </Pressable>
+                </Animated.View>
+              );
+            })}
           </View>
         </View>
 
