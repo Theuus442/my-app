@@ -136,7 +136,9 @@ export default function MoodScreen() {
 
         {/* Reasons Selection */}
         <View style={styles.section}>
-          <ThemedText style={styles.sectionTitle}>O que afeta seu humor? (opcional)</ThemedText>
+          <ThemedText style={[styles.sectionTitle, { color: colors.text }]}>
+            O que afeta seu humor? (opcional)
+          </ThemedText>
           <View style={styles.reasonsGrid}>
             {REASONS.map((reason) => (
               <Pressable
@@ -145,9 +147,11 @@ export default function MoodScreen() {
                   styles.reasonChip,
                   {
                     backgroundColor: selectedReasons.includes(reason)
-                      ? colors.primary
+                      ? colors.accent
                       : colors.card,
-                    borderColor: colors.border,
+                    borderColor: selectedReasons.includes(reason)
+                      ? colors.accent
+                      : colors.border,
                   },
                 ]}
                 onPress={() => toggleReason(reason)}>
