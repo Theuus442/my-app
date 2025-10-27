@@ -97,14 +97,6 @@ export default function TabLayout() {
           title: 'Configurações',
         }}
       />
-      {/* Legacy screen - keeping for compatibility */}
-      <Tabs.Screen
-        name="explore"
-        options={{
-          href: null,
-          title: 'Explore',
-        }}
-      />
     </Tabs>
   );
 }
