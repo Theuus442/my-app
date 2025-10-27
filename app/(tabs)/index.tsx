@@ -1,98 +1,183 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import React, { useState, useCallback } from 'react';
+import { StyleSheet, View, ScrollView, Pressable, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { AnimatedCompanion } from '@/components/animated-companion';
+import { WellnessBar } from '@/components/wellness-bar';
+import { QuoteCard } from '@/components/quote-card';
+import { QuickActionCard } from '@/components/quick-action-card';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useRouter } from 'expo-router';
+
+const MOTIVATIONAL_QUOTES = [
+  'Você é mais forte do que imagina! 💪',
+  'Respire fundo. Você está no controle. 🌬️',
+  'Cada pequeno passo importa. Continue! 🚶',
+  'Hoje é um novo começo. Aproveite! ☀️',
+  'Você merece cuidar de si mesmo. 💚',
+  'Está tudo bem não estar bem o tempo todo. 🤗',
+  'Seu progresso é válido, por menor que seja. 📈',
+];
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme ?? 'light'];
+  const router = useRouter();
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const [wellnessLevel, setWellnessLevel] = useState(75);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  const handleRefreshQuote = useCallback(() => {
+    setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
+  }, []);
+
+  const handleMeditationPress = () => {
+    router.push('/(tabs)/meditation');
+  };
+
+  const handleGratitudePress = () => {
+    router.push('/(tabs)/gratitude');
+  };
+
+  const handleMoodPress = () => {
+    router.push('/(tabs)/mood');
+  };
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    return now.toLocaleString('pt-BR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  return (
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View>
+            <ThemedText style={styles.greeting}>Olá, User! 👋</ThemedText>
+            <ThemedText style={styles.dateTime}>{getCurrentTime()}</ThemedText>
+          </View>
+          <Pressable
+            style={[
+              styles.settingsButton,
+              {
+                backgroundColor: colors.card,
+                borderColor: colors.border,
+              },
+            ]}
+            onPress={() => router.push('/(tabs)/settings')}>
+            <IconSymbol size={24} name="gear" color={colors.primary} />
+          </Pressable>
+        </View>
+
+        {/* Animated Companion */}
+        <AnimatedCompanion size={180} wellnessLevel={wellnessLevel} />
+
+        {/* Wellness Bar */}
+        <WellnessBar level={wellnessLevel} />
+
+        {/* Quote Card */}
+        <QuoteCard
+          quote={MOTIVATIONAL_QUOTES[currentQuoteIndex]}
+          onRefresh={handleRefreshQuote}
+        />
+
+        {/* Quick Actions Section */}
+        <View style={styles.quickActionsSection}>
+          <ThemedText style={styles.sectionTitle}>Ações Rápidas</ThemedText>
+          <View style={styles.quickActionsGrid}>
+            <QuickActionCard
+              emoji="🧘"
+              title="Meditação Rápida"
+              description="5 min"
+              onPress={handleMeditationPress}
+              containerStyle={styles.actionCard}
+            />
+            <QuickActionCard
+              emoji="📝"
+              title="Diário de Gratidão"
+              description="Registre bênçãos"
+              onPress={handleGratitudePress}
+              containerStyle={styles.actionCard}
+            />
+            <QuickActionCard
+              emoji="😊"
+              title="Como me sinto?"
+              description="Rastrear humor"
+              onPress={handleMoodPress}
+              containerStyle={styles.actionCard}
+            />
+          </View>
+        </View>
+
+        {/* Spacing */}
+        <View style={{ height: 20 }} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  safeArea: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 40,
+  },
+  header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 8,
+  },
+  greeting: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 4,
+  },
+  dateTime: {
+    fontSize: 12,
+    opacity: 0.6,
+  },
+  settingsButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    borderWidth: 1,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  quickActionsSection: {
+    paddingHorizontal: 20,
+    marginTop: 12,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 12,
+  },
+  quickActionsGrid: {
+    gap: 12,
+  },
+  actionCard: {
+    minHeight: 100,
   },
 });
