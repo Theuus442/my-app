@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Pressable, ViewStyle } from 'react-native';
+import { StyleSheet, View, Pressable, ViewStyle, Platform } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { moderateScale, scaleFont } from '@/utils/responsive';
 
 interface QuickActionCardProps {
   emoji: string;
@@ -40,7 +41,7 @@ export function QuickActionCard({
   }));
 
   return (
-    <Animated.View style={animatedStyle}>
+    <Animated.View style={animatedStyle} accessible accessibilityRole="button" accessibilityLabel={`${title}: ${description}`}>
       <Pressable
         style={[
           styles.container,
@@ -48,6 +49,7 @@ export function QuickActionCard({
             backgroundColor: colors.card,
             borderColor: colors.border,
             shadowColor: isPressed ? colors.primary : '#000',
+            padding: moderateScale(12),
           },
           containerStyle,
         ]}
@@ -55,17 +57,17 @@ export function QuickActionCard({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         android_ripple={{ color: colors.primary + '1A' }}>
-        <View style={[styles.iconContainer, { backgroundColor: colors.secondary + '12' }]}>
-          <ThemedText style={styles.emoji}>{emoji}</ThemedText>
+        <View style={[styles.iconContainer, { backgroundColor: colors.secondary + '12', width: moderateScale(56), height: moderateScale(56), borderRadius: moderateScale(14) }]}>
+          <ThemedText style={[styles.emoji, { fontSize: scaleFont(26) }]}>{emoji}</ThemedText>
         </View>
         <View style={styles.content}>
-          <ThemedText style={[styles.title, { color: colors.text }]}>{title}</ThemedText>
-          <ThemedText style={[styles.description, { color: colors.textSecondary }]}>
+          <ThemedText style={[styles.title, { color: colors.text, fontSize: scaleFont(15) }]}>{title}</ThemedText>
+          <ThemedText style={[styles.description, { color: colors.textSecondary, fontSize: scaleFont(12) }]}>
             {description}
           </ThemedText>
         </View>
-        <View style={[styles.arrow, { backgroundColor: colors.primary + '1A' }]}>
-          <ThemedText style={[styles.arrowIcon, { color: colors.primary }]}>→</ThemedText>
+        <View style={[styles.arrow, { backgroundColor: colors.primary + '1A', width: moderateScale(36), height: moderateScale(36), borderRadius: moderateScale(10) }]}>
+          <ThemedText style={[styles.arrowIcon, { color: colors.primary, fontSize: scaleFont(16) }]}>→</ThemedText>
         </View>
       </Pressable>
     </Animated.View>
@@ -86,9 +88,6 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   iconContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -99,25 +98,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 15,
     fontWeight: '700',
     marginBottom: 4,
     letterSpacing: -0.3,
   },
   description: {
-    fontSize: 12,
     lineHeight: 16,
     fontWeight: '500',
   },
   arrow: {
-    width: 36,
-    height: 36,
-    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
   },
   arrowIcon: {
-    fontSize: 18,
     fontWeight: '600',
   },
 });
