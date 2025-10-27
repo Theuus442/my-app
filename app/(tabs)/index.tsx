@@ -120,15 +120,15 @@ export default function HomeScreen() {
             {
               backgroundColor: colors.card,
               borderColor: colors.border,
-              paddingVertical: moderateScale(isTablet ? 36 : 22),
-              marginHorizontal: moderateScale(isTablet ? 28 : 20),
-              borderRadius: moderateScale(isTablet ? 32 : 24),
-              maxWidth: isTablet ? 820 : '100%',
+              paddingVertical: moderateScale(isTablet ? 32 : 20),
+              marginHorizontal: moderateScale(isTablet ? 24 : 16),
+              borderRadius: moderateScale(isTablet ? 28 : 20),
+              maxWidth: isTablet ? 600 : '100%',
               width: '100%',
             },
           ]}>
           <View style={styles.companionBackground} />
-          <AnimatedCompanion size={isTablet ? 180 : 140} wellnessLevel={wellnessLevel} />
+          <AnimatedCompanion size={isTablet ? 140 : 110} wellnessLevel={wellnessLevel} />
         </View>
 
         {/* Wellness Bar */}
