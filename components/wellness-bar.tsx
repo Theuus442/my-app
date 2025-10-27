@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { scaleFont, moderateScale } from '@/utils/responsive';
+import { scaleFont, moderateScale, clamp } from '@/utils/responsive';
+import { clampNumber } from '@/utils/helpers';
 
 interface WellnessBarProps {
   level: number; // 0-100
   containerStyle?: ViewStyle;
+  label?: string;
+  sublabel?: string;
+  testID?: string;
 }
 
 export function WellnessBar({ level, containerStyle }: WellnessBarProps) {
