@@ -354,58 +354,23 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
         </Animated.View>
       </Animated.View>
 
-      {/* Floating sparkle particles */}
-      {[0, 1, 2, 3].map((index) => {
-        const particleAnims = [useSharedValue(0), useSharedValue(0), useSharedValue(0), useSharedValue(0)];
-
-        if (index === 0) {
-          useEffect(() => {
-            particleAnims.forEach((anim) => {
-              anim.value = withRepeat(
-                withTiming(1, {
-                  duration: 3000,
-                  easing: Easing.inOut(Easing.ease),
-                }),
-                -1,
-                true
-              );
-            });
-          }, []);
-        }
-
-        const particleStyle = useAnimatedStyle(() => ({
-          transform: [
-            {
-              translateY: interpolate(
-                particleAnims[index].value,
-                [0, 0.5, 1],
-                [-size * 0.3, -size * 0.6, -size * 0.3],
-                Extrapolate.CLAMP
-              ),
-            },
-            {
-              translateX: interpolate(
-                particleAnims[index].value,
-                [0, 1],
-                [Math.cos((index * Math.PI) / 2) * size * 0.4, Math.cos((index * Math.PI) / 2) * size * 0.5],
-                Extrapolate.CLAMP
-              ),
-            },
-          ],
-          opacity: interpolate(particleAnims[index].value, [0, 0.5, 1], [0, 0.8, 0], Extrapolate.CLAMP),
-        }));
-
+      {/* Floating sparkle particles - subtle shine effect */}
+      {[0, 1, 2].map((index) => {
+        const sparkleOffset = 30 + index * 20;
         return (
           <Animated.View
             key={index}
             style={[
               styles.sparkle,
               {
-                width: size * 0.06,
-                height: size * 0.06,
-                borderRadius: size * 0.03,
+                width: size * 0.05,
+                height: size * 0.05,
+                borderRadius: size * 0.025,
+                left: `${sparkleOffset}%`,
+                bottom: -20,
+                opacity: 0.6,
               },
-              particleStyle,
+              glowAnimStyle,
             ]}
           />
         );
