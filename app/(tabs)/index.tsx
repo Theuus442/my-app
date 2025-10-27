@@ -27,8 +27,8 @@ export default function HomeScreen() {
   const colors = Colors[colorScheme ?? 'light'];
   const router = useRouter();
 
-  const { useDeviceSize } = require('@/utils/responsive');
-  const { isTablet } = useDeviceSize();
+  // lightweight device sizing hook
+  const { isTablet } = (await import('@/utils/responsive')).useDeviceSize ? (await import('@/utils/responsive')).useDeviceSize() : { isTablet: false };
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
