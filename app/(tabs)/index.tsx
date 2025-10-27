@@ -55,17 +55,6 @@ export default function HomeScreen() {
     router.push('/(tabs)/mood');
   };
 
-  const getCurrentTime = () => {
-    const now = new Date();
-    return now.toLocaleString('pt-BR', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
 
   const settingsBtnAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: settingsBtnScale.value }],
