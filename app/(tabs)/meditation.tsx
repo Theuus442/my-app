@@ -70,11 +70,6 @@ export default function MeditationScreen() {
     setTotalTime(0);
   };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
 
   const getProgress = () => {
     if (totalTime === 0) return 0;
