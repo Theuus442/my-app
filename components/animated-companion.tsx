@@ -71,7 +71,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
   const floatAnimStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateY: interpolate(floatAnim.value, [0, 1], [0, -20], Extrapolate.CLAMP),
+        translateY: interpolate(floatAnim.value, [0, 0.5, 1], [0, -24, 0], Extrapolate.CLAMP),
       },
     ],
   }));
@@ -79,13 +79,21 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
   const scaleAnimStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        scale: interpolate(pulseAnim.value, [0, 1], [1, 1.08], Extrapolate.CLAMP),
+        scale: interpolate(pulseAnim.value, [0, 0.5, 1], [1, 1.12, 1], Extrapolate.CLAMP),
       },
     ],
   }));
 
   const glowAnimStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(glowAnim.value, [0, 0.5, 1], [0.4, 0.8, 0.4], Extrapolate.CLAMP),
+    opacity: interpolate(glowAnim.value, [0, 0.5, 1], [0.3, 0.9, 0.3], Extrapolate.CLAMP),
+  }));
+
+  const rotationStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        rotate: `${interpolate(rotateAnim.value, [0, 1], [0, 360], Extrapolate.CLAMP)}deg`,
+      },
+    ],
   }));
 
   return (
