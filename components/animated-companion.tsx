@@ -5,7 +5,6 @@ import Animated, {
   useAnimatedStyle,
   withRepeat,
   withTiming,
-  withSpring,
   Easing,
   interpolate,
   Extrapolate,
@@ -25,12 +24,13 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
   const floatAnim = useSharedValue(0);
   const pulseAnim = useSharedValue(0);
   const glowAnim = useSharedValue(0);
+  const rotateAnim = useSharedValue(0);
 
   useEffect(() => {
     // Floating animation - smooth vertical movement
     floatAnim.value = withRepeat(
       withTiming(1, {
-        duration: 3000,
+        duration: 4000,
         easing: Easing.inOut(Easing.ease),
       }),
       -1,
@@ -40,7 +40,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
     // Pulse animation for glow
     pulseAnim.value = withRepeat(
       withTiming(1, {
-        duration: 2000,
+        duration: 2500,
         easing: Easing.inOut(Easing.ease),
       }),
       -1,
@@ -56,7 +56,17 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
       -1,
       true
     );
-  }, []);
+
+    // Subtle rotation
+    rotateAnim.value = withRepeat(
+      withTiming(1, {
+        duration: 20000,
+        easing: Easing.linear,
+      }),
+      -1,
+      true
+    );
+  }, [floatAnim, pulseAnim, glowAnim, rotateAnim]);
 
   const floatAnimStyle = useAnimatedStyle(() => ({
     transform: [
