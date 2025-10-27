@@ -29,10 +29,18 @@ export default function HomeScreen() {
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const settingsBtnScale = useSharedValue(1);
 
   const handleRefreshQuote = useCallback(() => {
     setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
   }, []);
+
+  const handleSettingsPress = () => {
+    settingsBtnScale.value = withSpring(0.9, { damping: 10, mass: 1 }, () => {
+      settingsBtnScale.value = withSpring(1);
+    });
+    router.push('/(tabs)/settings');
+  };
 
   const handleMeditationPress = () => {
     router.push('/(tabs)/meditation');
