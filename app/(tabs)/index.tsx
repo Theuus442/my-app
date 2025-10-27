@@ -30,14 +30,15 @@ export default function HomeScreen() {
   const router = useRouter();
 
   // lightweight device sizing hook
-  const { isTablet, isSmall } = useDeviceSize();
+  const { isTablet, isSmall, isWeb } = useDeviceSize();
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const settingsBtnScale = useSharedValue(1);
 
-  const greetingSize = scaleFont(isSmall ? 26 : isTablet ? 34 : 30);
-  const dateSize = scaleFont(isSmall ? 12 : isTablet ? 14 : 13);
+  // More conservative sizing for web, better for small screens
+  const greetingSize = scaleFont(isSmall ? 20 : isTablet && !isWeb ? 28 : 24);
+  const dateSize = scaleFont(isSmall ? 11 : isTablet && !isWeb ? 13 : 12);
 
   const handleRefreshQuote = useCallback(() => {
     setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % MOTIVATIONAL_QUOTES.length);
