@@ -178,7 +178,7 @@ export default function LibraryScreen() {
         showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <ThemedText style={styles.title}>Biblioteca</ThemedText>
+          <ThemedText style={[styles.title, { color: colors.text }]}>Biblioteca</ThemedText>
         </View>
 
         {/* Search */}
