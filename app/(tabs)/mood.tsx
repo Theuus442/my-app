@@ -8,25 +8,7 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ResponsiveContainer } from '@/components/responsive-container';
-
-const MOODS = [
-  { emoji: '💔', label: 'Muito Ruim', value: 1 },
-  { emoji: '😔', label: 'Ruim', value: 2 },
-  { emoji: '😌', label: 'Normal', value: 3 },
-  { emoji: '😊', label: 'Bem', value: 4 },
-  { emoji: '🌟', label: 'Ótimo', value: 5 },
-];
-
-const REASONS = [
-  'Trabalho',
-  'Relacionamento',
-  'Saúde',
-  'Finanças',
-  'Família',
-  'Amigos',
-  'Pessoal',
-  'Outro',
-];
+import { MOOD_OPTIONS, MOOD_REASONS } from '@/constants/data';
 
 export default function MoodScreen() {
   const colorScheme = useColorScheme();
