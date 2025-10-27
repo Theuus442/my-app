@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Pressable, ViewStyle, Platform } from 'react-native';
+import { StyleSheet, View, Pressable, ViewStyle } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import { ThemedText } from '@/components/themed-text';
 import { Colors } from '@/constants/theme';
