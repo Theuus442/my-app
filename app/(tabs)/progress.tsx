@@ -88,15 +88,15 @@ export default function ProgressScreen() {
   const getMoodEmoji = (mood: number) => {
     switch (mood) {
       case 1:
-        return '😢';
+        return '💔';
       case 2:
         return '😔';
       case 3:
-        return '😐';
+        return '😌';
       case 4:
-        return '🙂';
+        return '😊';
       case 5:
-        return '😄';
+        return '🌟';
       default:
         return '😐';
     }
