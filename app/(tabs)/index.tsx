@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, ScrollView, Pressable, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { AnimatedCompanion } from '@/components/animated-companion';
 import { WellnessBar } from '@/components/wellness-bar';
 import { QuoteCard } from '@/components/quote-card';
@@ -27,7 +26,7 @@ export default function HomeScreen() {
   const colors = Colors[colorScheme ?? 'light'];
   const router = useRouter();
 
-  const [wellnessLevel, setWellnessLevel] = useState(75);
+  const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
 
   const handleRefreshQuote = useCallback(() => {
