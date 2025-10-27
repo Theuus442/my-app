@@ -176,6 +176,7 @@ export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCo
                   height: size * 0.6,
                   borderRadius: size * 0.25,
                   bottom: size * 0.05,
+                  backgroundColor: colors.primary,
                 },
               ]}>
               <Animated.View
