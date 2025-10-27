@@ -29,7 +29,7 @@ export default function HomeScreen() {
   const router = useRouter();
 
   // lightweight device sizing hook
-  const { isTablet } = (await import('@/utils/responsive')).useDeviceSize ? (await import('@/utils/responsive')).useDeviceSize() : { isTablet: false };
+  const { isTablet } = useDeviceSize();
 
   const [wellnessLevel] = useState(75);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
