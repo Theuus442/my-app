@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { moderateScale } from '@/utils/responsive';
 
 interface AnimatedCompanionProps {
   size?: number;
@@ -18,6 +19,7 @@ interface AnimatedCompanionProps {
 }
 
 export function AnimatedCompanion({ size = 160, wellnessLevel = 75 }: AnimatedCompanionProps) {
+  const scaledSize = moderateScale(size);
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
