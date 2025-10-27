@@ -133,7 +133,7 @@ export default function MoodScreen() {
             O que afeta seu humor? (opcional)
           </ThemedText>
           <View style={styles.reasonsGrid}>
-            {REASONS.map((reason) => (
+            {MOOD_REASONS.map((reason) => (
               <Pressable
                 key={reason}
                 style={[
