@@ -11,6 +11,7 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
+import { ResponsiveContainer } from '@/components/responsive-container';
 import { useDeviceSize } from '@/utils/responsive';
 
 const MOTIVATIONAL_QUOTES = [
@@ -80,12 +81,13 @@ export default function HomeScreen() {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}>
+        <ResponsiveContainer>
         {/* Header with Gradient Background */}
         <View style={[styles.headerContainer, { backgroundColor: colors.background }]}>
           <View style={styles.header}>
             <View style={{ flex: 1 }}>
               <ThemedText style={[styles.greeting, { color: colors.text }]}>
-              Olá, User! 🌟
+              Olá, User! ��
             </ThemedText>
               <ThemedText style={[styles.dateTime, { color: colors.textSecondary }]}>
                 {getCurrentTime()}
@@ -162,6 +164,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Spacing */}
+        </ResponsiveContainer>
         <View style={{ height: 24 }} />
       </ScrollView>
     </SafeAreaView>
