@@ -9,11 +9,11 @@ import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 const MOODS = [
-  { emoji: '😢', label: 'Muito Ruim', value: 1 },
+  { emoji: '💔', label: 'Muito Ruim', value: 1 },
   { emoji: '😔', label: 'Ruim', value: 2 },
-  { emoji: '😐', label: 'Normal', value: 3 },
-  { emoji: '🙂', label: 'Bem', value: 4 },
-  { emoji: '😄', label: 'Ótimo', value: 5 },
+  { emoji: '😌', label: 'Normal', value: 3 },
+  { emoji: '😊', label: 'Bem', value: 4 },
+  { emoji: '🌟', label: 'Ótimo', value: 5 },
 ];
 
 const REASONS = [
