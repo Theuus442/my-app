@@ -13,14 +13,13 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useRouter } from 'expo-router';
 import { scaleFont, moderateScale, useDeviceSize } from '@/utils/responsive';
 import { ResponsiveContainer } from '@/components/responsive-container';
-import { useDeviceSize } from '@/utils/responsive';
 
 const MOTIVATIONAL_QUOTES = [
   'Você é mais forte do que imagina! 💪',
   'Respire fundo. Você está no controle. 🌬️',
   'Cada pequeno passo importa. Continue! 🚶',
   'Hoje é um novo começo. Aproveite! ☀️',
-  'Você merece cuidar de si mesmo. 💚',
+  'Você merece cuidar de si mesmo. ���',
   'Está tudo bem não estar bem o tempo todo. 🤗',
   'Seu progresso é válido, por menor que seja. 📈',
 ];
